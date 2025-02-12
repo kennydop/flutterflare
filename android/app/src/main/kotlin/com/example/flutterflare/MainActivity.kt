@@ -1,4 +1,4 @@
-package com.example.flutterflare
+package com.flutterflare.app
 
 import io.flutter.embedding.android.FlutterActivity
 
