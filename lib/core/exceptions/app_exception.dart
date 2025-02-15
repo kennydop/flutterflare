@@ -11,31 +11,31 @@ class AppException implements Exception {
 }
 
 class NetworkException extends AppException {
-  NetworkException([String message = 'Network error occurred'])
-      : super(message, code: 'NETWORK_ERROR');
+  NetworkException([super.message = 'Network error occurred'])
+      : super(code: 'NETWORK_ERROR');
 }
 
 class AuthException extends AppException {
-  AuthException([String message = 'Authentication error occurred'])
-      : super(message, code: 'AUTH_ERROR');
+  AuthException([super.message = 'Authentication error occurred'])
+      : super(code: 'AUTH_ERROR');
 }
 
 class ValidationException extends AppException {
-  ValidationException([String message = 'Validation error occurred'])
-      : super(message, code: 'VALIDATION_ERROR');
+  ValidationException([super.message = 'Validation error occurred'])
+      : super(code: 'VALIDATION_ERROR');
 }
 
 class ServerException extends AppException {
-  ServerException([String message = 'Server error occurred'])
-      : super(message, code: 'SERVER_ERROR');
+  ServerException([super.message = 'Server error occurred'])
+      : super(code: 'SERVER_ERROR');
 }
 
 class CacheException extends AppException {
-  CacheException([String message = 'Cache error occurred'])
-      : super(message, code: 'CACHE_ERROR');
+  CacheException([super.message = 'Cache error occurred'])
+      : super(code: 'CACHE_ERROR');
 }
 
 class UnknownException extends AppException {
-  UnknownException([String message = 'An unknown error occurred'])
-      : super(message, code: 'UNKNOWN_ERROR');
+  UnknownException([super.message = 'An unknown error occurred'])
+      : super(code: 'UNKNOWN_ERROR');
 }

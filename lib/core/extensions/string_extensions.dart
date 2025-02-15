@@ -14,11 +14,12 @@ extension StringX on String {
   bool get isValidPhone => FormValidator.validatePhone(this).isValid;
 
   /// Capitalizes the first letter of the string
-  // String get capitalize =>
-  //     isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String get capitalizeFirst =>
+      isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
 
   /// Capitalizes the first letter of each word in the string
-  // String get titleCase => split(' ').map((word) => word.capitalize).join(' ');
+  String get titleCase =>
+      split(' ').map((word) => word.capitalizeFirst).join(' ');
 
   /// Removes all whitespace from the string
   String get removeWhitespace => replaceAll(RegExp(r'\s+'), '');

@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 
 // Constant sizes for app spacing, paddings, gaps, border radius etc.
 class AppSizes {
+  // Sizes
+  static const s1 = 1.0;
+  static const s1Half = 1.5;
+  static const s2 = 2.0;
+  static const s2Half = 2.5;
+  static const s3 = 3.0;
   static const s4 = 4.0;
+  static const s4Half = 4.5;
+  static const s5 = 5.0;
+  static const s6 = 6.0;
   static const s8 = 8.0;
   static const s10 = 10.0;
   static const s12 = 12.0;
@@ -11,6 +20,7 @@ class AppSizes {
   static const s20 = 20.0;
   static const s24 = 24.0;
   static const s32 = 32.0;
+  static const s40 = 40.0;
   static const s48 = 48.0;
   static const s56 = 56.0;
   static const s64 = 64.0;
@@ -81,25 +91,43 @@ class AppSizes {
   static const m20 = 20.0;
   static const m24 = 24.0;
 
-  // Margin Widgets
+  // Margin & Padding Widgets
   static const marginV4 = EdgeInsets.symmetric(vertical: m4);
+  static const paddingV4 = marginV4;
   static const marginV8 = EdgeInsets.symmetric(vertical: m8);
+  static const paddingV8 = marginV8;
   static const marginV12 = EdgeInsets.symmetric(vertical: m12);
+  static const paddingV12 = marginV12;
   static const marginV16 = EdgeInsets.symmetric(vertical: m16);
+  static const paddingV16 = marginV16;
   static const marginV20 = EdgeInsets.symmetric(vertical: m20);
+  static const paddingV20 = marginV20;
   static const marginV24 = EdgeInsets.symmetric(vertical: m24);
+  static const paddingV24 = marginV24;
   static const marginH4 = EdgeInsets.symmetric(horizontal: m4);
+  static const paddingH4 = marginH4;
   static const marginH8 = EdgeInsets.symmetric(horizontal: m8);
+  static const paddingH8 = marginH8;
   static const marginH12 = EdgeInsets.symmetric(horizontal: m12);
+  static const paddingH12 = marginH12;
   static const marginH16 = EdgeInsets.symmetric(horizontal: m16);
+  static const paddingH16 = marginH16;
   static const marginH20 = EdgeInsets.symmetric(horizontal: m20);
+  static const paddingH20 = marginH20;
   static const marginH24 = EdgeInsets.symmetric(horizontal: m24);
+  static const paddingH24 = marginH24;
   static const marginAll4 = EdgeInsets.all(m4);
+  static const paddingAll4 = marginAll4;
   static const marginAll8 = EdgeInsets.all(m8);
+  static const paddingAll8 = marginAll8;
   static const marginAll12 = EdgeInsets.all(m12);
+  static const paddingAll12 = marginAll12;
   static const marginAll16 = EdgeInsets.all(m16);
+  static const paddingAll16 = marginAll16;
   static const marginAll20 = EdgeInsets.all(m20);
+  static const paddingAll20 = marginAll20;
   static const marginAll24 = EdgeInsets.all(m24);
+  static const paddingAll24 = marginAll24;
   static const gutter = EdgeInsets.symmetric(horizontal: m16);
 
   // Icon Sizes
@@ -111,6 +139,7 @@ class AppSizes {
   static const iconSize64 = 64.0;
 
   // Font Sizes
+  static const fontSize10 = 10.0;
   static const fontSize11 = 11.0;
   static const fontSize12 = 12.0;
   static const fontSize13 = 13.0;
@@ -123,6 +152,7 @@ class AppSizes {
   static const fontSize20 = 20.0;
   static const fontSize24 = 24.0;
   static const fontSize32 = 32.0;
+  static const fontSize36 = 36.0;
   static const fontSize48 = 48.0;
   static const fontSize64 = 64.0;
 }

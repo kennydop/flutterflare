@@ -78,7 +78,7 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
             itemExtent: 32.0,
             scrollController: FixedExtentScrollController(
               initialItem: widget.value != null
-                  ? widget.items.indexOf(widget.value!)
+                  ? widget.items.indexOf(widget.value as T)
                   : 0,
             ),
             onSelectedItemChanged: (int selectedIndex) {
@@ -133,7 +133,7 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
                 children: [
                   Text(
                     widget.value != null
-                        ? widget.itemLabel(widget.value!)
+                        ? widget.itemLabel(widget.value as T)
                         : widget.hint ?? 'Select',
                     style: AppTextStyles.body1.copyWith(
                       color: widget.value != null

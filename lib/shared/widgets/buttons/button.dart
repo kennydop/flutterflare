@@ -63,7 +63,7 @@ class Button extends StatelessWidget {
 
     // Get variant-specific styles
     final variantStyle = _getVariantStyle(colorScheme);
-    final sizeStyle = _getSizeStyle();
+    final sizeStyle = _getSizeStyle(context);
 
     // Merge with custom styles
     final mergedStyle = variantStyle.copyWith(
@@ -75,8 +75,8 @@ class Button extends StatelessWidget {
           : null,
       padding: padding != null ? WidgetStateProperty.all(padding) : null,
       minimumSize: WidgetStateProperty.all(Size(
-        width ?? sizeStyle.width,
-        height ?? sizeStyle.height,
+        width ?? sizeStyle.width ?? double.infinity,
+        height ?? sizeStyle.height ?? Theme.of(context).buttonTheme.height,
       )),
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(
@@ -204,28 +204,28 @@ class Button extends StatelessWidget {
     }
   }
 
-  _SizeStyle _getSizeStyle() {
+  _SizeStyle _getSizeStyle(BuildContext context) {
     switch (size) {
       case ButtonSize.small:
         return _SizeStyle(
-          height: 32,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          iconSize: 16,
-          spacing: 4,
+          height: Theme.of(context).buttonTheme.height * 0.8,
+          padding: AppSizes.marginH12,
+          iconSize: AppSizes.iconSize16,
+          spacing: AppSizes.g4,
         );
       case ButtonSize.medium:
         return _SizeStyle(
-          height: 40,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          iconSize: 20,
-          spacing: 8,
+          height: Theme.of(context).buttonTheme.height,
+          padding: AppSizes.marginH16,
+          iconSize: AppSizes.iconSize20,
+          spacing: AppSizes.g8,
         );
       case ButtonSize.large:
         return _SizeStyle(
-          height: 48,
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          iconSize: 24,
-          spacing: 8,
+          height: Theme.of(context).buttonTheme.height * 1.2,
+          padding: AppSizes.marginH24,
+          iconSize: AppSizes.iconSize24,
+          spacing: AppSizes.g8,
         );
     }
   }
@@ -255,7 +255,7 @@ class Button extends StatelessWidget {
 
     if (isDisabled) {
       return baseStyle.copyWith(
-        color: baseStyle.color?.withOpacity(0.5),
+        color: baseStyle.color?.withAlpha(128),
       );
     }
 
@@ -264,15 +264,15 @@ class Button extends StatelessWidget {
 }
 
 class _SizeStyle {
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final EdgeInsetsGeometry padding;
   final double iconSize;
   final double spacing;
 
   const _SizeStyle({
-    this.height = 40,
-    this.width = double.infinity,
+    this.height,
+    this.width,
     required this.padding,
     required this.iconSize,
     required this.spacing,
@@ -319,7 +319,7 @@ class _ButtonContent extends StatelessWidget {
       onPressed: () {},
       label: '',
       size: size,
-    )._getSizeStyle();
+    )._getSizeStyle(context);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -369,8 +369,7 @@ class _GradientButton extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: onPressed == null ? null : gradient,
         borderRadius: borderRadius,
-        color:
-            onPressed == null ? gradient.colors.first.withOpacity(0.5) : null,
+        color: onPressed == null ? gradient.colors.first.withAlpha(128) : null,
       ),
       child: TapDetector(
         onTap: onPressed,

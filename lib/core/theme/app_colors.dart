@@ -71,7 +71,7 @@ class AppColors {
   static const Color border = Color(0xFFE0E0E0);
 
   // Semantic Colors
-  static const Color success = Color(0xFF4CAF50);
+  static const Color success = Color(0xFF3ED680);
   static const Color error = Color(0xFFEF4444);
   static const Color warning = Color(0xFFFFC107);
   static const Color info = primaryLight;

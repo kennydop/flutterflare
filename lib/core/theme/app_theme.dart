@@ -68,7 +68,7 @@ class AppTheme {
         ),
         buttonColor: AppColors.primaryLight,
         textTheme: ButtonTextTheme.primary,
-        height: AppSizes.s56,
+        height: AppSizes.s48,
       ),
       inputDecorationTheme: InputDecorationTheme(
         focusColor: AppColors.primaryLight,
@@ -116,7 +116,7 @@ class AppTheme {
           color: AppColors.placeholder,
         ),
         labelStyle: AppTextStyles.body2.copyWith(
-          color: AppColors.placeholder,
+          color: AppColors.textBody,
         ),
         prefixIconColor: AppColors.gray500,
         suffixIconColor: AppColors.gray500,
@@ -130,7 +130,7 @@ class AppTheme {
         checkmarkColor: AppColors.textOnPrimary,
         labelStyle: AppTextStyles.body2.copyWith(
           color: const ChipLabelColor(),
-          fontSize: 16,
+          fontSize: AppSizes.fontSize14,
           fontWeight: FontWeight.w500,
         ),
       ),

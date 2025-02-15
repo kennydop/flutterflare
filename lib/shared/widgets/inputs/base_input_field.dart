@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterflare/core/theme/app_colors.dart';
 import 'package:flutterflare/core/theme/app_text_styles.dart';
 
 final inputFocusProvider =
@@ -98,9 +97,10 @@ class BaseInputFieldState extends ConsumerState<BaseInputField> {
             padding: const EdgeInsets.only(bottom: 4.0),
             child: Text(
               widget.label!,
-              style: AppTextStyles.body1.copyWith(
-                color:
-                    isFocused ? AppColors.primaryLight : AppColors.textHeading,
+              style: AppTextStyles.label.copyWith(
+                color: isFocused
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.w500,
               ),
             ),

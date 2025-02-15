@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
+import 'package:flutterflare/core/services/notification/toast_service.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/features/auth/views/register_view.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
@@ -43,6 +44,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
 
+    // Show error toast when auth state has an error
+    ref.listen<AuthState>(authProvider, (previous, next) {
+      if (next.error != null && (previous?.error != next.error)) {
+        Toast.showError(next.error!);
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -68,16 +76,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     textAlign: TextAlign.center,
                   ),
                   AppSizes.gapH16,
-                  if (authState.error != null) ...[
-                    Text(
-                      authState.error!,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                    AppSizes.gapH16,
-                  ],
                   EmailInputField(
                     label: AppStrings.emailInputLabel,
                     hint: AppStrings.emailInputHint,

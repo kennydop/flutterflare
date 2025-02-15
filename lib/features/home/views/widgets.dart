@@ -72,7 +72,7 @@ class _WidgetsState extends State<Widgets> {
             backgroundColor: Colors.purple,
             foregroundColor: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             onPressed: () {},
           ),
           AppSizes.gapH16,
