@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
+import 'package:flutterflare/core/services/loading/loading_service.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
 import 'package:flutterflare/shared/widgets/inputs/email_input_field.dart';
@@ -29,9 +30,12 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
 
   Future<void> _handleResetPassword() async {
     if (_formKey.currentState?.validate() ?? false) {
-      await ref
-          .read(authProvider.notifier)
-          .sendPasswordResetEmail(_emailController.text.trim());
+      await ref.withLoading(() async {
+        await ref
+            .read(authProvider.notifier)
+            .sendPasswordResetEmail(_emailController.text.trim());
+      });
+
       setState(() {
         _resetEmailSent = true;
       });
@@ -46,7 +50,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
     ref.watch(authErrorHandlerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Reset Password')),
+      appBar: AppBar(),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -93,7 +97,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         ),
         AppSizes.gapH16,
         Button(
-          label: 'Reset Password',
+          label: AppStrings.resetPassword,
           onPressed: _handleResetPassword,
           isLoading: authState.isLoading,
         ),

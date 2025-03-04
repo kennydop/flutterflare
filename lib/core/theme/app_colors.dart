@@ -109,4 +109,10 @@ class AppColors {
   static const Gradient secondaryGradient = LinearGradient(
     colors: [Color(0xFFECF1FE), Color(0xFF4574F6)],
   );
+  static Gradient bgGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Colors.purple.shade50, Colors.blue.shade100],
+    stops: [0.0, 0.8],
+  );
 }

@@ -27,9 +27,21 @@ class AppSizes {
   static const s80 = 80.0;
   static const s96 = 96.0;
   static const s100 = 100.0;
+  static const s120 = 120.0;
+  static const s140 = 140.0;
+  static const s160 = 160.0;
+  static const s180 = 180.0;
+  static const s200 = 200.0;
+  static const s220 = 220.0;
+  static const s240 = 240.0;
+  static const s260 = 260.0;
+  static const s280 = 280.0;
+  static const s300 = 300.0;
+  static const s320 = 320.0;
 
   // Paddings
   static const p4 = 4.0;
+  static const p6 = 6.0;
   static const p8 = 8.0;
   static const p10 = 10.0;
   static const p12 = 12.0;
@@ -37,9 +49,11 @@ class AppSizes {
   static const p16 = 16.0;
   static const p20 = 20.0;
   static const p24 = 24.0;
+  static const p32 = 32.0;
 
   // Border Radius
   static const r4 = 4.0;
+  static const r6 = 6.0;
   static const r8 = 8.0;
   static const r10 = 10.0;
   static const r12 = 12.0;
@@ -47,10 +61,12 @@ class AppSizes {
   static const r16 = 16.0;
   static const r20 = 20.0;
   static const r24 = 24.0;
+  static const r32 = 32.0;
   static const rFull = 9999.0;
 
   // Border Radius Widgets
   static const r4Radius = BorderRadius.all(Radius.circular(r4));
+  static const r6Radius = BorderRadius.all(Radius.circular(r6));
   static const r8Radius = BorderRadius.all(Radius.circular(r8));
   static const r10Radius = BorderRadius.all(Radius.circular(r10));
   static const r12Radius = BorderRadius.all(Radius.circular(r12));
@@ -58,9 +74,11 @@ class AppSizes {
   static const r16Radius = BorderRadius.all(Radius.circular(r16));
   static const r20Radius = BorderRadius.all(Radius.circular(r20));
   static const r24Radius = BorderRadius.all(Radius.circular(r24));
+  static const r32Radius = BorderRadius.all(Radius.circular(r32));
   static const rFullRadius = BorderRadius.all(Radius.circular(rFull));
   // Gaps
   static const g4 = 4.0;
+  static const g6 = 6.0;
   static const g8 = 8.0;
   static const g10 = 10.0;
   static const g12 = 12.0;
@@ -68,9 +86,10 @@ class AppSizes {
   static const g16 = 16.0;
   static const g20 = 20.0;
   static const g24 = 24.0;
-
+  static const g32 = 32.0;
   // Gap Widgets
   static const gapW4 = SizedBox(width: g4);
+  static const gapW6 = SizedBox(width: g6);
   static const gapW8 = SizedBox(width: g8);
   static const gapW12 = SizedBox(width: g12);
   static const gapW16 = SizedBox(width: g16);
@@ -82,9 +101,11 @@ class AppSizes {
   static const gapH16 = SizedBox(height: g16);
   static const gapH20 = SizedBox(height: g20);
   static const gapH24 = SizedBox(height: g24);
+  static const gapH32 = SizedBox(height: g32);
 
   // Margins
   static const m4 = 4.0;
+  static const m6 = 6.0;
   static const m8 = 8.0;
   static const m12 = 12.0;
   static const m16 = 16.0;
@@ -118,6 +139,8 @@ class AppSizes {
   static const paddingH24 = marginH24;
   static const marginAll4 = EdgeInsets.all(m4);
   static const paddingAll4 = marginAll4;
+  static const marginAll6 = EdgeInsets.all(m6);
+  static const paddingAll6 = marginAll6;
   static const marginAll8 = EdgeInsets.all(m8);
   static const paddingAll8 = marginAll8;
   static const marginAll12 = EdgeInsets.all(m12);
@@ -129,6 +152,7 @@ class AppSizes {
   static const marginAll24 = EdgeInsets.all(m24);
   static const paddingAll24 = marginAll24;
   static const gutter = EdgeInsets.symmetric(horizontal: m16);
+  static const gutterValue = m16;
 
   // Icon Sizes
   static const iconSize16 = 16.0;

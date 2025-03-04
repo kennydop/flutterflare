@@ -1,4 +1,8 @@
 class AppStrings {
+  static const String appName = 'FlutterFlare';
+  static const String appShortDescription =
+      'From zero to app stores in days, not months.';
+  static const String getStarted = 'Get Started';
   static const String signIn = 'Sign in';
   static const String signUp = 'Sign up';
   static const String signInPageHeader = 'Welcome Back!';
@@ -13,11 +17,14 @@ class AppStrings {
   static const String passwordInputHint = 'Enter your password';
   static const String confirmPasswordInputLabel = 'Confirm Password';
   static const String confirmPasswordInputHint = 'Confirm your password';
+  static const String pleaseConfirmPassword = 'Please confirm your password';
+  static const String passwordsDoNotMatch = 'Passwords do not match';
   static const String signInButtonLabel = 'Sign in';
   static const String signUpButtonLabel = 'Sign up';
   static const String forgotPassword = 'Forgot password?';
+  static const String resetPassword = 'Reset Password';
   static const String dontHaveAccount = "Don't have an account?";
-  static const String alreadyHaveAccount = "Already have an account?";
+  static const String alreadyHaveAccount = "Already have an account? ";
   static const String signInWithGoogle = 'Continue with Google';
   static const String signInWithApple = 'Continue with Apple';
   static const String signInWithEmail = 'Continue with Email';

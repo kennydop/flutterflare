@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflare/core/theme/app_colors.dart';
 
 enum LoaderSize { small, medium, large }
 
@@ -27,11 +28,11 @@ class Loader extends StatelessWidget {
   double _getSize() {
     switch (size) {
       case LoaderSize.small:
-        return 20;
+        return 24;
       case LoaderSize.medium:
-        return 28;
-      case LoaderSize.large:
         return 32;
+      case LoaderSize.large:
+        return 40;
     }
   }
 
@@ -45,7 +46,7 @@ class Loader extends StatelessWidget {
           strokeCap: StrokeCap.round,
           strokeWidth: strokeWidth ?? _getStrokeWidth(),
           valueColor: AlwaysStoppedAnimation<Color>(
-            color ?? Theme.of(context).colorScheme.primary,
+            color ?? AppColors.primaryLight,
           ),
         ),
       ),

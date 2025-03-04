@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflare/core/constants/app_sizes.dart';
+import 'package:flutterflare/shared/widgets/buttons/button.dart';
 import 'package:flutterflare/shared/widgets/loader.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:colorful_iconify_flutter/icons/logos.dart';
 
-enum SocialSignInProvider { google, apple, facebook, twitter }
+enum SocialSignInProvider { google, apple }
 
 class SocialSignInButton extends StatelessWidget {
   final SocialSignInProvider provider;
@@ -20,19 +21,9 @@ class SocialSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return Button(
       onPressed: isLoading ? null : onPressed,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: Theme.of(context).colorScheme.outline),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      color: Colors.transparent,
-      elevation: 0,
-      hoverElevation: 0,
-      focusElevation: 0,
-      highlightElevation: 0,
-      disabledElevation: 0,
+      variant: ButtonVariant.ghost,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -56,13 +47,7 @@ class SocialSignInButton extends StatelessWidget {
 
   Widget _buildProviderIcon() {
     return Iconify(
-      provider == SocialSignInProvider.google
-          ? Logos.google_icon
-          : provider == SocialSignInProvider.apple
-          ? Logos.apple
-          : provider == SocialSignInProvider.facebook
-          ? Logos.facebook
-          : Logos.twitter,
+      provider == SocialSignInProvider.google ? Logos.google_icon : Logos.apple,
     );
   }
 
@@ -72,10 +57,6 @@ class SocialSignInButton extends StatelessWidget {
         return 'Continue with Google';
       case SocialSignInProvider.apple:
         return 'Continue with Apple';
-      case SocialSignInProvider.facebook:
-        return 'Continue with Facebook';
-      case SocialSignInProvider.twitter:
-        return 'Continue with X';
     }
   }
 }

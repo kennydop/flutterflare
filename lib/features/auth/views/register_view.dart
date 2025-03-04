@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
+import 'package:flutterflare/core/services/loading/loading_service.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
+import 'package:flutterflare/features/auth/views/login_view.dart';
+import 'package:flutterflare/shared/widgets/or_divider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
@@ -10,7 +13,8 @@ import 'package:flutterflare/shared/widgets/inputs/email_input_field.dart';
 import 'package:flutterflare/shared/widgets/inputs/password_input_field.dart';
 
 class RegisterView extends ConsumerStatefulWidget {
-  const RegisterView({super.key});
+  final String? previousRoutePath;
+  const RegisterView({super.key, this.previousRoutePath = LoginView.routePath});
 
   static const String routePath = '/register';
 
@@ -34,27 +38,31 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   String? _validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
+      return AppStrings.pleaseConfirmPassword;
     }
     if (value != _passwordController.text) {
-      return 'Passwords do not match';
+      return AppStrings.passwordsDoNotMatch;
     }
     return null;
   }
 
   Future<void> _handleRegister() async {
     if (_formKey.currentState?.validate() ?? false) {
-      await ref
-          .read(authProvider.notifier)
-          .createUserWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          );
+      await ref.withLoading(() async {
+        await ref
+            .read(authProvider.notifier)
+            .createUserWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text,
+            );
+      });
     }
   }
 
   Future<void> _handleGoogleSignIn() async {
-    await ref.read(authProvider.notifier).signInWithGoogle();
+    await ref.withLoading(() async {
+      await ref.read(authProvider.notifier).signInWithGoogle();
+    });
   }
 
   @override
@@ -130,7 +138,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     children: [
                       const Text(AppStrings.alreadyHaveAccount),
                       TextButton(
-                        onPressed: () => context.pop(),
+                        onPressed: () {
+                          if (widget.previousRoutePath == LoginView.routePath) {
+                            context.pop();
+                          } else {
+                            context.push(LoginView.routePath);
+                          }
+                        },
                         child: const Text(AppStrings.signInButtonLabel),
                       ),
                     ],
@@ -147,22 +161,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   Widget _buildSocialSignInSection(AuthState authState) {
     return Column(
       children: [
-        Row(
-          children: [
-            const Expanded(child: Divider()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'OR',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const Expanded(child: Divider()),
-          ],
-        ),
+        OrDivider(),
         AppSizes.gapH16,
         SocialSignInButton(
           provider: SocialSignInProvider.google,

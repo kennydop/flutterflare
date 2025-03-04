@@ -3,14 +3,14 @@ import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/theme/app_colors.dart';
 
 class AppTextStyles {
-  static const String headingFontFamily = 'BricolageGrotesque';
+  static const String headingFontFamily = 'DelaGothicOne';
   static const String bodyFontFamily = 'Urbanist';
 
   // Display Styles
   static const TextStyle display1 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize64,
-    fontWeight: FontWeight.bold,
+    // fontWeight: FontWeight.bold,
     letterSpacing: -0.25,
     height: 1.12,
     color: AppColors.textHeading,
@@ -19,7 +19,7 @@ class AppTextStyles {
   static const TextStyle display2 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize48,
-    fontWeight: FontWeight.bold,
+    // fontWeight: FontWeight.bold,
     letterSpacing: 0,
     height: 1.16,
     color: AppColors.textHeading,
@@ -29,7 +29,7 @@ class AppTextStyles {
   static const TextStyle headline1 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize36,
-    fontWeight: FontWeight.bold,
+    // fontWeight: FontWeight.bold,
     letterSpacing: 0,
     height: 1.22,
     color: AppColors.textHeading,
@@ -38,7 +38,7 @@ class AppTextStyles {
   static const TextStyle headline2 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize32,
-    fontWeight: FontWeight.w600,
+    // fontWeight: FontWeight.w600,
     letterSpacing: 0,
     height: 1.25,
     color: AppColors.textHeading,
@@ -47,7 +47,7 @@ class AppTextStyles {
   static const TextStyle headline3 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize24,
-    fontWeight: FontWeight.w600,
+    // fontWeight: FontWeight.w600,
     letterSpacing: 0,
     height: 1.29,
     color: AppColors.textHeading,
@@ -57,7 +57,7 @@ class AppTextStyles {
   static const TextStyle title1 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize24,
-    fontWeight: FontWeight.w600,
+    // fontWeight: FontWeight.w600,
     letterSpacing: 0,
     height: 1.33,
     color: AppColors.textHeading,
@@ -66,7 +66,7 @@ class AppTextStyles {
   static const TextStyle title2 = TextStyle(
     fontFamily: headingFontFamily,
     fontSize: AppSizes.fontSize20,
-    fontWeight: FontWeight.w600,
+    // fontWeight: FontWeight.w600,
     letterSpacing: 0,
     height: 1.4,
     color: AppColors.textHeading,

@@ -43,9 +43,7 @@ class AppTheme {
         scrolledUnderElevation: .15,
         titleTextStyle: AppTextStyles.body1,
       ),
-      dividerTheme: const DividerThemeData(
-        color: AppColors.divider,
-      ),
+      dividerTheme: const DividerThemeData(color: AppColors.divider),
       listTileTheme: const ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(
           horizontal: AppSizes.m16,
@@ -55,17 +53,11 @@ class AppTheme {
       cardTheme: const CardTheme(
         color: AppColors.surfaceLight,
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppSizes.r16Radius,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: AppSizes.r16Radius),
       ),
-      iconTheme: const IconThemeData(
-        color: AppColors.gray500,
-      ),
+      iconTheme: const IconThemeData(color: AppColors.gray500),
       buttonTheme: const ButtonThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: AppSizes.r8Radius,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: AppSizes.r8Radius),
         buttonColor: AppColors.primaryLight,
         textTheme: ButtonTextTheme.primary,
         height: AppSizes.s48,
@@ -77,55 +69,37 @@ class AppTheme {
           vertical: AppSizes.m8,
         ),
         iconColor: AppColors.textHeading,
-        border: const OutlineInputBorder(
-          borderRadius: AppSizes.r8Radius,
-        ),
+        border: const OutlineInputBorder(borderRadius: AppSizes.r8Radius),
         filled: true,
         fillColor: AppColors.gray100,
         enabledBorder: const OutlineInputBorder(
           borderRadius: AppSizes.r8Radius,
-          borderSide: BorderSide(
-            color: AppColors.gray300,
-          ),
+          borderSide: BorderSide(color: AppColors.gray300),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AppSizes.r8Radius,
-          borderSide: BorderSide(
-            color: AppColors.primaryLight,
-          ),
+          borderSide: BorderSide(color: AppColors.primaryLight),
         ),
         errorBorder: const OutlineInputBorder(
           borderRadius: AppSizes.r8Radius,
-          borderSide: BorderSide(
-            color: AppColors.error,
-          ),
+          borderSide: BorderSide(color: AppColors.error),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderRadius: AppSizes.r8Radius,
-          borderSide: BorderSide(
-            color: AppColors.error,
-          ),
+          borderSide: BorderSide(color: AppColors.error),
         ),
         disabledBorder: const OutlineInputBorder(
           borderRadius: AppSizes.r8Radius,
-          borderSide: BorderSide(
-            color: AppColors.gray100,
-          ),
+          borderSide: BorderSide(color: AppColors.gray100),
         ),
-        hintStyle: AppTextStyles.body2.copyWith(
-          color: AppColors.placeholder,
-        ),
-        labelStyle: AppTextStyles.body2.copyWith(
-          color: AppColors.textBody,
-        ),
+        hintStyle: AppTextStyles.body2.copyWith(color: AppColors.placeholder),
+        labelStyle: AppTextStyles.body2.copyWith(color: AppColors.textBody),
         prefixIconColor: AppColors.gray500,
         suffixIconColor: AppColors.gray500,
       ),
       chipTheme: ChipThemeData(
         elevation: 0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: AppSizes.r8Radius,
-        ),
+        shape: const RoundedRectangleBorder(borderRadius: AppSizes.r8Radius),
         selectedColor: AppColors.primaryLight,
         checkmarkColor: AppColors.textOnPrimary,
         labelStyle: AppTextStyles.body2.copyWith(
@@ -134,6 +108,10 @@ class AppTheme {
           fontWeight: FontWeight.w500,
         ),
       ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.primaryLight,
+      ),
+      indicatorColor: AppColors.primaryLight,
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
+import 'package:flutterflare/core/logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutterflare/core/exceptions/app_exception.dart';
 import 'package:flutterflare/features/auth/models/user_model.dart';
@@ -62,8 +63,10 @@ class AuthRepository {
 
       return UserModel.fromFirebaseUser(userCredential.user!);
     } on FirebaseAuthException catch (e) {
+      logger.e('Error creating user with email and password: $e');
       throw AuthException(_getErrorMessage(e.code));
     } catch (e) {
+      logger.e('Error creating user with email and password: $e');
       throw AuthException(AppStrings.unexpectedErrorOccurred);
     }
   }
@@ -96,9 +99,10 @@ class AuthRepository {
 
       return UserModel.fromFirebaseUser(userCredential.user!);
     } on FirebaseAuthException catch (e) {
+      logger.e('Error signing in with Google: $e');
       throw AuthException(_getErrorMessage(e.code));
     } catch (e) {
-      debugPrint('Error: $e');
+      logger.e('Error signing in with Google: $e');
       throw AuthException(AppStrings.googleSignInFailed);
     }
   }
@@ -113,6 +117,7 @@ class AuthRepository {
     try {
       await _auth.signOut();
     } catch (e) {
+      logger.e('Error signing out: $e');
       throw AuthException(AppStrings.signOutFailed);
     }
   }
@@ -121,14 +126,16 @@ class AuthRepository {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
+      logger.e('Error sending password reset email: $e');
       throw AuthException(_getErrorMessage(e.code));
     } catch (e) {
+      logger.e('Error sending password reset email: $e');
       throw AuthException(AppStrings.failedToSendPasswordResetEmail);
     }
   }
 
   String _getErrorMessage(String code) {
-    debugPrint('Error code: $code');
+    logger.e('Error code: $code');
     switch (code) {
       case 'user-not-found':
         return 'No user found with this email';

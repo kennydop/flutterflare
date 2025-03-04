@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
+import 'package:flutterflare/core/services/loading/loading_service.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/features/auth/views/register_view.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
 import 'package:flutterflare/shared/widgets/buttons/social_signin_button.dart';
 import 'package:flutterflare/shared/widgets/inputs/email_input_field.dart';
 import 'package:flutterflare/shared/widgets/inputs/password_input_field.dart';
+import 'package:flutterflare/shared/widgets/or_divider.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginView extends ConsumerStatefulWidget {
-  const LoginView({super.key});
+  final String? previousRoutePath;
+  const LoginView({super.key, this.previousRoutePath = RegisterView.routePath});
 
   static const String routePath = '/login';
 
@@ -32,18 +35,23 @@ class _LoginViewState extends ConsumerState<LoginView> {
   }
 
   Future<void> _handleLogin() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      await ref
-          .read(authProvider.notifier)
-          .signInWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          );
-    }
+    // if (_formKey.currentState?.validate() ?? false) {
+    await ref.withLoading(() async {
+      // await ref
+      //     .read(authProvider.notifier)
+      //     .signInWithEmailAndPassword(
+      //       email: _emailController.text.trim(),
+      //       password: _passwordController.text,
+      //     );
+      await Future.delayed(const Duration(seconds: 5));
+    });
+    // }
   }
 
   Future<void> _handleGoogleSignIn() async {
-    await ref.read(authProvider.notifier).signInWithGoogle();
+    // await LoadingOverlay.during(() async {
+    //   await ref.read(authProvider.notifier).signInWithGoogle();
+    // });
   }
 
   @override
@@ -117,7 +125,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     children: [
                       const Text(AppStrings.dontHaveAccount),
                       TextButton(
-                        onPressed: () => context.push(RegisterView.routePath),
+                        onPressed: () {
+                          if (widget.previousRoutePath ==
+                              RegisterView.routePath) {
+                            context.pop();
+                          } else {
+                            context.push(RegisterView.routePath);
+                          }
+                        },
                         child: const Text(AppStrings.signUp),
                       ),
                     ],
@@ -134,22 +149,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Widget _buildSocialSignInSection(AuthState authState) {
     return Column(
       children: [
-        Row(
-          children: [
-            const Expanded(child: Divider()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'OR',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const Expanded(child: Divider()),
-          ],
-        ),
+        OrDivider(),
         AppSizes.gapH16,
         SocialSignInButton(
           provider: SocialSignInProvider.google,
