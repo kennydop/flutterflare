@@ -2,6 +2,7 @@ class AppStrings {
   static const String appName = 'FlutterFlare';
   static const String appShortDescription =
       'From zero to app stores in days, not months.';
+  static const String continueText = 'Continue';
   static const String getStarted = 'Get Started';
   static const String signIn = 'Sign in';
   static const String signUp = 'Sign up';

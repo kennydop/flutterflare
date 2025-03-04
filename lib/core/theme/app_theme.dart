@@ -4,7 +4,7 @@ import 'package:flutterflare/core/theme/app_colors.dart';
 import 'package:flutterflare/core/theme/app_text_styles.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData get light {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -115,7 +115,7 @@ class AppTheme {
     );
   }
 
-  // static ThemeData get darkTheme {
+  // static ThemeData get dark {
   //   return ThemeData(
   //     useMaterial3: true,
   //     brightness: Brightness.dark,
