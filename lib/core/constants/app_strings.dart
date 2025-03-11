@@ -4,8 +4,8 @@ class AppStrings {
       'From zero to app stores in days, not months.';
   static const String continueText = 'Continue';
   static const String getStarted = 'Get Started';
-  static const String signIn = 'Sign in';
-  static const String signUp = 'Sign up';
+  static const String signIn = 'Sign In';
+  static const String signUp = 'Sign Up';
   static const String signInPageHeader = 'Welcome Back!';
   static const String signInPageSubHeader =
       'Sign in to your account to continue';
@@ -20,9 +20,9 @@ class AppStrings {
   static const String confirmPasswordInputHint = 'Confirm your password';
   static const String pleaseConfirmPassword = 'Please confirm your password';
   static const String passwordsDoNotMatch = 'Passwords do not match';
-  static const String signInButtonLabel = 'Sign in';
-  static const String signUpButtonLabel = 'Sign up';
-  static const String forgotPassword = 'Forgot password?';
+  static const String forgotPassword = 'Forgot Password?';
+  static const String forgotPasswordDescription =
+      'Enter your email address and we\'ll send you a link to reset your password';
   static const String resetPassword = 'Reset Password';
   static const String dontHaveAccount = "Don't have an account?";
   static const String alreadyHaveAccount = "Already have an account? ";
@@ -43,4 +43,15 @@ class AppStrings {
   static const String signOutFailed = 'Sign out failed';
   static const String failedToSendPasswordResetEmail =
       'Failed to send password reset email';
+  static const String noUserFoundWithThisEmail =
+      'No user found with this email';
+  static const String wrongPasswordProvided = 'Wrong password provided';
+  static const String checkYourInbox = 'Check your inbox';
+  static const String weSentAResetPasswordLinkTo =
+      'We sent a reset password link to';
+  static const String tryDifferentEmail = 'Try a different email';
+  static const String passwordResetLinkSent =
+      'A password reset link has been sent to your email';
+  static const String rememberYourPassword = 'Remember your password?';
+  static const String errorOccurred = 'An error occurred';
 }

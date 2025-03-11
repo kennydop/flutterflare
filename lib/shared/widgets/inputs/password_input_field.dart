@@ -5,8 +5,9 @@ import 'package:flutterflare/shared/widgets/inputs/base_input_field.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ri.dart';
 
-final passwordVisibilityProvider =
-    StateProvider.family<bool, String>((ref, id) => false);
+final passwordVisibilityProvider = StateProvider.family<bool, String>(
+  (ref, id) => false,
+);
 
 class PasswordInputField extends ConsumerWidget {
   final String fieldId;
@@ -71,7 +72,4 @@ class PasswordInputField extends ConsumerWidget {
   }
 }
 
-enum PasswordInputFieldType {
-  New,
-  Existing,
-}
+enum PasswordInputFieldType { New, Existing }

@@ -51,43 +51,45 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
   }
 
   Future<void> _showCupertinoPicker() async {
-    final items = widget.items
-        .map((item) => Center(
-              child: Text(
-                widget.itemLabel(item),
-                style: AppTextStyles.body1,
+    final items =
+        widget.items
+            .map(
+              (item) => Center(
+                child: Text(widget.itemLabel(item), style: AppTextStyles.body1),
               ),
-            ))
-        .toList();
+            )
+            .toList();
 
     await showCupertinoModalPopup<void>(
       context: context,
-      builder: (BuildContext context) => Container(
-        height: 216,
-        padding: const EdgeInsets.only(top: 6.0),
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        color: CupertinoColors.systemBackground.resolveFrom(context),
-        child: SafeArea(
-          top: false,
-          child: CupertinoPicker(
-            magnification: 1.22,
-            squeeze: 1.2,
-            useMagnifier: true,
-            itemExtent: 32.0,
-            scrollController: FixedExtentScrollController(
-              initialItem: widget.value != null
-                  ? widget.items.indexOf(widget.value as T)
-                  : 0,
+      builder:
+          (BuildContext context) => Container(
+            height: 216,
+            padding: const EdgeInsets.only(top: 6.0),
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            onSelectedItemChanged: (int selectedIndex) {
-              widget.onChanged(widget.items[selectedIndex]);
-            },
-            children: items,
+            color: CupertinoColors.systemBackground.resolveFrom(context),
+            child: SafeArea(
+              top: false,
+              child: CupertinoPicker(
+                magnification: 1.22,
+                squeeze: 1.2,
+                useMagnifier: true,
+                itemExtent: 32.0,
+                scrollController: FixedExtentScrollController(
+                  initialItem:
+                      widget.value != null
+                          ? widget.items.indexOf(widget.value as T)
+                          : 0,
+                ),
+                onSelectedItemChanged: (int selectedIndex) {
+                  widget.onChanged(widget.items[selectedIndex]);
+                },
+                children: items,
+              ),
+            ),
           ),
-        ),
-      ),
     );
   }
 
@@ -102,9 +104,10 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
             child: Text(
               widget.label!,
               style: AppTextStyles.body1.copyWith(
-                color: _focusNode.hasFocus
-                    ? AppColors.primaryLight
-                    : AppColors.textHeading,
+                color:
+                    _focusNode.hasFocus
+                        ? AppColors.primaryLight
+                        : AppColors.textHeading,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -120,9 +123,10 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
               decoration: BoxDecoration(
                 color: widget.enabled ? AppColors.gray100 : AppColors.gray200,
                 border: Border.all(
-                  color: widget.error != null
-                      ? AppColors.error
-                      : _focusNode.hasFocus
+                  color:
+                      widget.error != null
+                          ? AppColors.error
+                          : _focusNode.hasFocus
                           ? AppColors.primaryLight
                           : AppColors.gray300,
                 ),
@@ -136,15 +140,13 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
                         ? widget.itemLabel(widget.value as T)
                         : widget.hint ?? 'Select',
                     style: AppTextStyles.body1.copyWith(
-                      color: widget.value != null
-                          ? AppColors.textHeading
-                          : AppColors.placeholder,
+                      color:
+                          widget.value != null
+                              ? AppColors.textHeading
+                              : AppColors.placeholder,
                     ),
                   ),
-                  const Icon(
-                    CupertinoIcons.chevron_down,
-                    size: 20,
-                  ),
+                  const Icon(CupertinoIcons.chevron_down, size: 20),
                 ],
               ),
             ),
@@ -153,14 +155,15 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
           DropdownButtonFormField<T>(
             focusNode: _focusNode,
             value: widget.value,
-            items: widget.items
-                .map(
-                  (item) => DropdownMenuItem(
-                    value: item,
-                    child: Text(widget.itemLabel(item)),
-                  ),
-                )
-                .toList(),
+            items:
+                widget.items
+                    .map(
+                      (item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(widget.itemLabel(item)),
+                      ),
+                    )
+                    .toList(),
             onChanged: widget.enabled ? widget.onChanged : null,
             decoration: InputDecoration(
               hintText: widget.hint,
@@ -173,9 +176,7 @@ class DropdownFieldState<T> extends ConsumerState<DropdownField<T>> {
             padding: const EdgeInsets.only(top: 4.0),
             child: Text(
               widget.error!,
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.error,
-              ),
+              style: AppTextStyles.caption.copyWith(color: AppColors.error),
             ),
           ),
       ],

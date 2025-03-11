@@ -55,7 +55,4 @@ class EmailInputField extends ConsumerWidget {
   }
 }
 
-enum EmailInputFieldType {
-  New,
-  Existing,
-}
+enum EmailInputFieldType { New, Existing }

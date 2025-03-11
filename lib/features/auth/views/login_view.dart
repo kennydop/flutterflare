@@ -4,6 +4,7 @@ import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
 import 'package:flutterflare/core/services/loading/loading_service.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
+import 'package:flutterflare/features/auth/views/forgot_password_view.dart';
 import 'package:flutterflare/features/auth/views/register_view.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
 import 'package:flutterflare/shared/widgets/buttons/social_signin_button.dart';
@@ -35,30 +36,29 @@ class _LoginViewState extends ConsumerState<LoginView> {
   }
 
   Future<void> _handleLogin() async {
-    // if (_formKey.currentState?.validate() ?? false) {
-    await ref.withLoading(() async {
-      // await ref
-      //     .read(authProvider.notifier)
-      //     .signInWithEmailAndPassword(
-      //       email: _emailController.text.trim(),
-      //       password: _passwordController.text,
-      //     );
-      await Future.delayed(const Duration(seconds: 5));
-    });
-    // }
+    if (_formKey.currentState?.validate() ?? false) {
+      await ref.withLoading(() async {
+        await ref
+            .read(authProvider.notifier)
+            .signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text,
+            );
+      });
+    }
   }
 
   Future<void> _handleGoogleSignIn() async {
-    // await LoadingOverlay.during(() async {
-    //   await ref.read(authProvider.notifier).signInWithGoogle();
-    // });
+    await ref.withLoading(() async {
+      await ref.read(authProvider.notifier).signInWithGoogle();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
 
-    // Use the centralized error handler
+    // Use the centralized auth error handler
     ref.watch(authErrorHandlerProvider);
 
     return Scaffold(
@@ -107,8 +107,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () => context.push('/forgot-password'),
-                      child: const Text('Forgot Password?'),
+                      onPressed:
+                          () => context.push(ForgotPasswordView.routePath),
+                      child: const Text(AppStrings.forgotPassword),
                     ),
                   ),
                   AppSizes.gapH16,

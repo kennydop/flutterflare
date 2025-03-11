@@ -69,7 +69,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
 
-    // Use the centralized error handler
+    // Use the centralized auth error handler
     ref.watch(authErrorHandlerProvider);
 
     return Scaffold(
@@ -126,7 +126,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   ),
                   AppSizes.gapH16,
                   Button(
-                    label: AppStrings.signUpButtonLabel,
+                    label: AppStrings.signUp,
                     onPressed: _handleRegister,
                     isLoading: authState.isLoading,
                   ),
@@ -145,7 +145,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             context.push(LoginView.routePath);
                           }
                         },
-                        child: const Text(AppStrings.signInButtonLabel),
+                        child: const Text(AppStrings.signIn),
                       ),
                     ],
                   ),

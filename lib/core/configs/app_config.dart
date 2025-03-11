@@ -1,31 +1,23 @@
-enum Environment {
-  dev,
-  staging,
-  prod,
-}
+import 'package:flutter/material.dart';
+import 'package:flutterflare/core/configs/env.dart';
+
+enum Environment { dev, staging, prod }
 
 class AppConfig {
   static Environment environment = Environment.dev;
 
-  // API Configuration
-  static String get apiUrl {
-    switch (environment) {
-      case Environment.dev:
-        return 'http://localhost:5001/api';
-      case Environment.staging:
-        return 'https://staging-api.flutterflare.com';
-      case Environment.prod:
-        return 'https://api.flutterflare.com';
-    }
-  }
-
-  // Feature Flags
-  static bool get enableCrashlytics => environment != Environment.dev;
-  static bool get enableAnalytics => environment != Environment.dev;
-
   // App Settings
   static const String appName = 'FlutterFlare';
+  static String get appNameWithEnvironment {
+    // Get app name with environment for non-production builds
+    if (environment == Environment.prod) {
+      return appName;
+    }
+    return '$appName (${environment.name.toUpperCase()})';
+  }
+
   static const String appVersion = '1.0.0';
+  static const String appBuildNumber = '1';
 
   // Cache Settings
   static const int cacheValidityDuration = 24 * 60 * 60; // 24 hours in seconds

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/theme/app_text_styles.dart';
 
-final inputFocusProvider =
-    StateProvider.family<bool, String>((ref, id) => false);
+final inputFocusProvider = StateProvider.family<bool, String>(
+  (ref, id) => false,
+);
 
 class BaseInputField extends ConsumerStatefulWidget {
   final String fieldId;
@@ -98,9 +99,10 @@ class BaseInputFieldState extends ConsumerState<BaseInputField> {
             child: Text(
               widget.label!,
               style: AppTextStyles.label.copyWith(
-                color: isFocused
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.onSurface,
+                color:
+                    isFocused
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.w500,
               ),
             ),

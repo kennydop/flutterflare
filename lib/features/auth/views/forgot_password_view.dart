@@ -50,7 +50,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
     ref.watch(authErrorHandlerProvider);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: const Text('Reset Password')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -97,7 +97,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         ),
         AppSizes.gapH16,
         Button(
-          label: AppStrings.resetPassword,
+          label: 'Reset Password',
           onPressed: _handleResetPassword,
           isLoading: authState.isLoading,
         ),
