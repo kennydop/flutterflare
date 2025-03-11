@@ -5,6 +5,7 @@ import 'package:flutterflare/core/logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutterflare/core/exceptions/app_exception.dart';
 import 'package:flutterflare/features/auth/models/user_model.dart';
+import 'package:flutterflare/features/auth/repositories/user_repository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 part 'auth_repository.g.dart';
@@ -16,12 +17,32 @@ FirebaseAuth firebaseAuth(FirebaseAuthRef ref) {
 
 class AuthRepository {
   final FirebaseAuth _auth;
+  final UserRepository _userRepository;
 
-  AuthRepository({FirebaseAuth? auth}) : _auth = auth ?? FirebaseAuth.instance;
+  AuthRepository({FirebaseAuth? auth, UserRepository? userRepository})
+    : _auth = auth ?? FirebaseAuth.instance,
+      _userRepository = userRepository ?? UserRepository();
 
   Stream<UserModel?> authStateChanges() {
-    return _auth.authStateChanges().map((user) {
-      return user != null ? UserModel.fromFirebaseUser(user) : null;
+    return _auth.authStateChanges().asyncMap((user) async {
+      if (user == null) return null;
+
+      // Fetch the user data from Firestore
+      try {
+        final firestoreUser = await _userRepository.getUser(user.uid);
+        if (firestoreUser != null) {
+          return firestoreUser;
+        }
+
+        // If user doesn't exist in Firestore, create a basic record
+        final authUser = UserModel.fromFirebaseUser(user);
+        await _userRepository.saveUser(authUser);
+        return authUser;
+      } catch (e) {
+        logger.e('Error fetching user data: $e');
+        // Return basic user info from Firebase Auth if Firestore fetch fails
+        return UserModel.fromFirebaseUser(user);
+      }
     });
   }
 
@@ -39,7 +60,23 @@ class AuthRepository {
         throw AuthException(AppStrings.signInFailed);
       }
 
-      return UserModel.fromFirebaseUser(userCredential.user!);
+      // Fetch user data from Firestore
+      final user = userCredential.user!;
+      final firestoreUser = await _userRepository.getUser(user.uid);
+
+      if (firestoreUser != null) {
+        // Update the last login time and isOnline status
+        await _userRepository.updateUser(user.uid, {
+          'lastLoginAt': DateTime.now().toIso8601String(),
+          'isOnline': true,
+        });
+        return firestoreUser;
+      }
+
+      // If user doesn't exist in Firestore (rare case), create one
+      final authUser = UserModel.fromFirebaseUser(user);
+      await _userRepository.saveUser(authUser);
+      return authUser;
     } on FirebaseAuthException catch (e) {
       throw AuthException(_getErrorMessage(e.code));
     } catch (e) {
@@ -50,6 +87,8 @@ class AuthRepository {
   Future<UserModel> createUserWithEmailAndPassword({
     required String email,
     required String password,
+    String? firstName,
+    String? lastName,
   }) async {
     try {
       final userCredential = await _auth.createUserWithEmailAndPassword(
@@ -61,7 +100,30 @@ class AuthRepository {
         throw AuthException(AppStrings.registrationFailed);
       }
 
-      return UserModel.fromFirebaseUser(userCredential.user!);
+      // Try to update the display name if first name is provided
+      if (firstName != null || lastName != null) {
+        final displayName = '${firstName ?? ''} ${lastName ?? ''}'.trim();
+        if (displayName.isNotEmpty) {
+          await userCredential.user!.updateDisplayName(displayName);
+        }
+      }
+
+      // Create a user model from Firebase user
+      UserModel userModel = UserModel.fromFirebaseUser(userCredential.user!);
+
+      // If firstName and lastName are not available from Firebase,
+      // but were provided directly to this method, use those values
+      if (firstName != null || lastName != null) {
+        userModel = userModel.copyWith(
+          firstName: firstName ?? userModel.firstName,
+          lastName: lastName ?? userModel.lastName,
+        );
+      }
+
+      // Save the user data to Firestore
+      await _userRepository.saveUser(userModel);
+
+      return userModel;
     } on FirebaseAuthException catch (e) {
       logger.e('Error creating user with email and password: $e');
       throw AuthException(_getErrorMessage(e.code));
@@ -97,7 +159,23 @@ class AuthRepository {
         throw AuthException(AppStrings.googleSignInFailed);
       }
 
-      return UserModel.fromFirebaseUser(userCredential.user!);
+      // Check if user exists in Firestore
+      final user = userCredential.user!;
+      final firestoreUser = await _userRepository.getUser(user.uid);
+
+      if (firestoreUser != null) {
+        // Update the last login time and isOnline status
+        await _userRepository.updateUser(user.uid, {
+          'lastLoginAt': DateTime.now().toIso8601String(),
+          'isOnline': true,
+        });
+        return firestoreUser;
+      }
+
+      // If user doesn't exist in Firestore, create one
+      final userModel = UserModel.fromFirebaseUser(user);
+      await _userRepository.saveUser(userModel);
+      return userModel;
     } on FirebaseAuthException catch (e) {
       logger.e('Error signing in with Google: $e');
       throw AuthException(_getErrorMessage(e.code));
@@ -115,6 +193,15 @@ class AuthRepository {
 
   Future<void> signOut() async {
     try {
+      // Update isOnline status to false before signing out
+      final currentUser = _auth.currentUser;
+      if (currentUser != null) {
+        await _userRepository.updateUser(currentUser.uid, {
+          'isOnline': false,
+          'lastLoginAt': DateTime.now().toIso8601String(),
+        });
+      }
+
       await _auth.signOut();
     } catch (e) {
       logger.e('Error signing out: $e');
@@ -168,5 +255,6 @@ class AuthRepository {
 @Riverpod(keepAlive: true)
 AuthRepository authRepository(AuthRepositoryRef ref) {
   final auth = ref.watch(firebaseAuthProvider);
-  return AuthRepository(auth: auth);
+  final userRepository = ref.watch(userRepositoryProvider);
+  return AuthRepository(auth: auth, userRepository: userRepository);
 }

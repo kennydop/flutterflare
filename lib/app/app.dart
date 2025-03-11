@@ -8,6 +8,7 @@ import 'package:flutterflare/core/configs/env.dart';
 import 'package:flutterflare/core/configs/flavor_banner.dart';
 import 'package:flutterflare/core/logger/logger.dart';
 import 'package:flutterflare/core/router/app_router.dart';
+import 'package:flutterflare/core/services/lifecycle/app_lifecycle_service.dart';
 import 'package:flutterflare/core/services/storage/local_storage_service.dart';
 import 'package:flutterflare/core/theme/app_theme.dart';
 import 'package:flutterflare/firebase_options.dart';
@@ -21,6 +22,9 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+
+    // Initialize the app lifecycle service
+    ref.watch(appLifecycleServiceProvider);
 
     return LoadingOverlayWidget(
       child: ToastificationWrapper(

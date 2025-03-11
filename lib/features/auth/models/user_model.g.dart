@@ -13,6 +13,13 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
   lastName: json['lastName'] as String?,
   photoURL: json['photoURL'] as String?,
   emailVerified: json['emailVerified'] as bool? ?? false,
+  phoneNumber: json['phoneNumber'] as String?,
+  bio: json['bio'] as String?,
+  roles:
+      (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
+  preferences: json['preferences'] as Map<String, dynamic>?,
+  provider: json['provider'] as String?,
   createdAt:
       json['createdAt'] == null
           ? null
@@ -25,6 +32,7 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
       json['lastLoginAt'] == null
           ? null
           : DateTime.parse(json['lastLoginAt'] as String),
+  isOnline: json['isOnline'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
@@ -35,7 +43,13 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'lastName': instance.lastName,
       'photoURL': instance.photoURL,
       'emailVerified': instance.emailVerified,
+      'phoneNumber': instance.phoneNumber,
+      'bio': instance.bio,
+      'roles': instance.roles,
+      'preferences': instance.preferences,
+      'provider': instance.provider,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'lastLoginAt': instance.lastLoginAt?.toIso8601String(),
+      'isOnline': instance.isOnline,
     };

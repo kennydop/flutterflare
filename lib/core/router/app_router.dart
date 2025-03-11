@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/services/storage/local_storage_service.dart';
+import 'package:flutterflare/features/auth/views/user_profile_view.dart';
 import 'package:flutterflare/features/home/views/home_view.dart';
 import 'package:flutterflare/features/onboarding/views/onboarding_view.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ import 'package:flutterflare/features/auth/views/login_view.dart';
 import 'package:flutterflare/features/auth/views/register_view.dart';
 import 'package:flutterflare/features/auth/views/forgot_password_view.dart';
 import 'package:flutterflare/features/welcome/views/welcome_view.dart';
+import 'package:flutterflare/shared/widgets/app_loading_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -18,18 +20,20 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation:
-        localStorage.hasOnboardingCompleted()
-            ? WelcomeView.routePath
-            : OnboardingView.routePath,
+    initialLocation: '/loading',
     debugLogDiagnostics: true,
     redirect: (context, state) {
-      // If the auth state is loading, show a loading screen
-      if (authState.isLoading) {
-        return null;
+      // Show loading screen until auth state is determined
+      final isLoading = authState.isLoading;
+      final isLoggedIn = authState.valueOrNull != null;
+      final isLoadingScreen = state.matchedLocation == '/loading';
+
+      // If auth state is loading, stay on loading screen
+      if (isLoading) {
+        return isLoadingScreen ? null : '/loading';
       }
 
-      final isLoggedIn = authState.valueOrNull != null;
+      // Now we have auth state, handle redirection
       final isAuthRoute =
           state.matchedLocation == LoginView.routePath ||
           state.matchedLocation == RegisterView.routePath ||
@@ -37,6 +41,17 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isWelcomeRoute = state.matchedLocation == WelcomeView.routePath;
       final isOnboardingRoute =
           state.matchedLocation == OnboardingView.routePath;
+
+      // Don't stay on loading screen once we have auth state
+      if (isLoadingScreen) {
+        // If onboarding hasn't been completed, go to onboarding
+        if (!localStorage.hasOnboardingCompleted()) {
+          return OnboardingView.routePath;
+        }
+
+        // If logged in, go to home, else go to welcome
+        return isLoggedIn ? HomeView.routePath : WelcomeView.routePath;
+      }
 
       // If onboarding hasn't been completed and not on onboarding route, redirect to onboarding
       if (!localStorage.hasOnboardingCompleted() && !isOnboardingRoute) {
@@ -59,6 +74,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      // Loading screen route
+      GoRoute(
+        path: '/loading',
+        builder: (context, state) => const AppLoadingScreen(),
+      ),
       GoRoute(
         path: OnboardingView.routePath,
         name: OnboardingView.routePath,
@@ -104,9 +124,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/profile',
         name: 'profile',
-        builder:
-            (context, state) =>
-                const Scaffold(body: Center(child: Text('Profile Screen'))),
+        builder: (context, state) => const UserProfileView(),
       ),
     ],
     errorBuilder:
