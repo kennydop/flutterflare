@@ -22,14 +22,26 @@ final authErrorHandlerProvider = Provider<void>((ref) {
 });
 
 class AuthState {
+  final bool isInitialized;
   final bool isLoading;
   final String? error;
   final UserModel? user;
 
-  const AuthState({this.isLoading = false, this.error, this.user});
+  const AuthState({
+    this.isInitialized = false,
+    this.isLoading = false,
+    this.error,
+    this.user,
+  });
 
-  AuthState copyWith({bool? isLoading, String? error, UserModel? user}) {
+  AuthState copyWith({
+    bool? isInitialized,
+    bool? isLoading,
+    String? error,
+    UserModel? user,
+  }) {
     return AuthState(
+      isInitialized: isInitialized ?? this.isInitialized,
       isLoading: isLoading ?? this.isLoading,
       error: error,
       user: user ?? this.user,
@@ -37,10 +49,45 @@ class AuthState {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Auth extends _$Auth {
   @override
-  AuthState build() => const AuthState();
+  AuthState build() {
+    // Listen to auth state changes
+    ref.watch(authStateProvider);
+
+    _initialize();
+
+    return const AuthState(isLoading: true, isInitialized: false);
+  }
+
+  Future<void> _initialize() async {
+    // Initialize with loading state
+    state = const AuthState(isLoading: true, isInitialized: false);
+
+    try {
+      // Check current user or perform initialization
+      final currentUser = ref.read(firebaseAuthProvider).currentUser;
+      if (currentUser != null) {
+        final userModel = await ref
+            .read(userRepositoryProvider)
+            .getUser(currentUser.uid);
+        state = AuthState(
+          isInitialized: true,
+          isLoading: false,
+          user: userModel,
+        );
+      } else {
+        state = const AuthState(isInitialized: true, isLoading: false);
+      }
+    } catch (e) {
+      state = const AuthState(
+        isInitialized: true,
+        isLoading: false,
+        error: 'Failed to initialize authentication',
+      );
+    }
+  }
 
   Future<void> signInWithEmailAndPassword({
     required String email,

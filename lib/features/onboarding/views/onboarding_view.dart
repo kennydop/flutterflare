@@ -137,7 +137,7 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
               height:
                   MediaQuery.of(context).padding.bottom > 0
                       ? MediaQuery.of(context).padding.bottom
-                      : AppSizes.p16,
+                      : AppSizes.s16,
             ),
           ],
         ),

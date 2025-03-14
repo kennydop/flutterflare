@@ -37,7 +37,7 @@ class DotIndicator extends StatelessWidget {
                     ? (activeColor ?? Theme.of(context).colorScheme.primary)
                     : (inactiveColor ??
                         Theme.of(context).colorScheme.primary.withAlpha(100)),
-            borderRadius: AppSizes.rFullRadius,
+            borderRadius: AppSizes.rFull,
           ),
         );
       }),

@@ -36,7 +36,7 @@ class _WelcomeViewState extends State<WelcomeView> {
             ),
             child: Center(
               child: Image.asset(
-                AppImages.logoAnimated,
+                AppImages.logo,
                 width: AppSizes.s120,
                 height: AppSizes.s120,
               ),
@@ -95,7 +95,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                 height:
                     MediaQuery.of(context).padding.bottom > 0
                         ? MediaQuery.of(context).padding.bottom
-                        : AppSizes.p16,
+                        : AppSizes.s16,
               ),
             ],
           ),

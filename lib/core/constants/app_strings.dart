@@ -54,4 +54,5 @@ class AppStrings {
       'A password reset link has been sent to your email';
   static const String rememberYourPassword = 'Remember your password?';
   static const String errorOccurred = 'An error occurred';
+  static const String deviceInfo = 'Device Info';
 }

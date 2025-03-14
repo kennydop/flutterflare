@@ -5,6 +5,7 @@ import 'package:flutterflare/features/auth/models/user_model.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 
 class UserProfileView extends ConsumerWidget {
+  static const routePath = '/profile';
   const UserProfileView({Key? key}) : super(key: key);
 
   @override

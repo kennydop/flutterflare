@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/services/loading/loading_service.dart';
 import 'package:flutterflare/shared/widgets/loader.dart';
 
@@ -46,12 +47,12 @@ class LoadingOverlayWidget extends ConsumerWidget {
 
   Widget _defaultLoadingIndicator() {
     return Container(
-      height: 80,
-      width: 80,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      height: AppSizes.s80,
+      width: AppSizes.s80,
+      padding: AppSizes.p16,
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppSizes.r8,
       ),
       child: const Loader(),
     );

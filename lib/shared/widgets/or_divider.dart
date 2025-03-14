@@ -10,7 +10,7 @@ class OrDivider extends StatelessWidget {
       children: [
         const Expanded(child: Divider()),
         Padding(
-          padding: AppSizes.paddingH16,
+          padding: AppSizes.ph16,
           child: Text('OR', style: Theme.of(context).textTheme.bodyMedium),
         ),
         const Expanded(child: Divider()),

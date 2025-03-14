@@ -33,10 +33,11 @@ class LoadingOverlay extends _$LoadingOverlay {
 }
 
 // A global provider that offers access to the loading overlay service
-final loadingOverlayGlobalProvider = StateProvider<bool>((ref) {
+@Riverpod(keepAlive: true)
+bool loadingOverlayGlobal(LoadingOverlayGlobalRef ref) {
   // We link to the autoDispose provider so it synchronizes
   return ref.watch(loadingOverlayProvider);
-});
+}
 
 // Extension on WidgetRef to make it easier to use the loading overlay
 extension LoadingOverlayRefExtension on WidgetRef {

@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
 import 'package:flutterflare/core/services/loading/loading_service.dart';
+import 'package:flutterflare/core/theme/app_colors.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
+import 'package:flutterflare/features/auth/views/login_view.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
 import 'package:flutterflare/shared/widgets/inputs/email_input_field.dart';
 import 'package:go_router/go_router.dart';
@@ -74,13 +76,13 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Forgot Password?',
+          AppStrings.forgotPassword,
           style: Theme.of(context).textTheme.headlineLarge,
           textAlign: TextAlign.center,
         ),
         AppSizes.gapH8,
         Text(
-          'Enter your email address and we\'ll send you a link to reset your password',
+          AppStrings.forgotPasswordDescription,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
@@ -97,7 +99,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         ),
         AppSizes.gapH16,
         Button(
-          label: 'Reset Password',
+          label: AppStrings.resetPassword,
           onPressed: _handleResetPassword,
           isLoading: authState.isLoading,
         ),
@@ -105,7 +107,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Remember your password?'),
+            const Text(AppStrings.rememberYourPassword),
             TextButton(
               onPressed: () => context.pop(),
               child: const Text(AppStrings.signIn),
@@ -121,21 +123,28 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Icon(Icons.mark_email_read, size: 70, color: Colors.green),
+        const Icon(
+          Icons.mark_email_read,
+          size: AppSizes.s80,
+          color: AppColors.success,
+        ),
         AppSizes.gapH16,
         Text(
-          'Check your inbox',
+          AppStrings.checkYourInbox,
           style: Theme.of(context).textTheme.headlineLarge,
           textAlign: TextAlign.center,
         ),
         AppSizes.gapH8,
         Text(
-          'We sent a password reset link to:\n${_emailController.text}',
+          '${AppStrings.weSentAResetPasswordLinkTo}:\n${_emailController.text}',
           style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
         AppSizes.gapH16,
-        Button(label: AppStrings.signIn, onPressed: () => context.go('/login')),
+        Button(
+          label: AppStrings.signIn,
+          onPressed: () => context.go(LoginView.routePath),
+        ),
         AppSizes.gapH8,
         TextButton(
           onPressed: () {

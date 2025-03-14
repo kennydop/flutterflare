@@ -76,7 +76,7 @@ class Button extends StatelessWidget {
       ),
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(
-          borderRadius: borderRadius ?? AppSizes.r8Radius,
+          borderRadius: borderRadius ?? AppSizes.r8,
           side: variantStyle.side?.resolve({}) ?? BorderSide.none,
         ),
       ),
@@ -203,23 +203,23 @@ class Button extends StatelessWidget {
       case ButtonSize.small:
         return _SizeStyle(
           height: Theme.of(context).buttonTheme.height * 0.8,
-          padding: AppSizes.marginH12,
-          iconSize: AppSizes.iconSize16,
-          spacing: AppSizes.g4,
+          padding: AppSizes.mh12,
+          iconSize: AppSizes.s16,
+          spacing: AppSizes.s4,
         );
       case ButtonSize.medium:
         return _SizeStyle(
           height: Theme.of(context).buttonTheme.height,
-          padding: AppSizes.marginH16,
-          iconSize: AppSizes.iconSize20,
-          spacing: AppSizes.g8,
+          padding: AppSizes.mh16,
+          iconSize: AppSizes.s20,
+          spacing: AppSizes.s8,
         );
       case ButtonSize.large:
         return _SizeStyle(
           height: Theme.of(context).buttonTheme.height * 1.2,
-          padding: AppSizes.marginH24,
-          iconSize: AppSizes.iconSize24,
-          spacing: AppSizes.g8,
+          padding: AppSizes.mh24,
+          iconSize: AppSizes.s24,
+          spacing: AppSizes.s8,
         );
     }
   }

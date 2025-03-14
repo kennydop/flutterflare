@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutterflare/core/logger/logger.dart';
 import 'package:flutterflare/features/auth/repositories/user_repository.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
+
+part 'app_lifecycle_service.g.dart';
 
 // Service that manages app lifecycle events
 class AppLifecycleService extends WidgetsBindingObserver {
@@ -12,17 +15,16 @@ class AppLifecycleService extends WidgetsBindingObserver {
 
   AppLifecycleService(this._ref) {
     WidgetsBinding.instance.addObserver(this);
-    _checkAndUpdateInitialStatus();
+    _checkAndUpdateUserOnlineStatus();
   }
 
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
   }
 
-  // Check initial app state and update user status
-  Future<void> _checkAndUpdateInitialStatus() async {
-    // Small delay to ensure auth state is loaded
-    await Future.delayed(const Duration(milliseconds: 500));
+  Future<void> _checkAndUpdateUserOnlineStatus() async {
+    // Small delay to ensure auth state is loaded & user did not open app by mistake
+    await Future.delayed(const Duration(milliseconds: 3000));
     _updateUserOnlineStatus(true);
   }
 
@@ -64,11 +66,11 @@ class AppLifecycleService extends WidgetsBindingObserver {
     _isUpdatingStatus = true;
 
     try {
-      final authState = _ref.read(authStateProvider);
+      final auth = _ref.read(authProvider);
 
       // Only proceed if auth state is not loading and user is logged in
-      if (!authState.isLoading) {
-        final user = authState.valueOrNull;
+      if (!auth.isLoading) {
+        final user = auth.user;
 
         if (user != null) {
           logger.d('Updating user ${user.uid} online status to: $isOnline');
@@ -94,7 +96,8 @@ class AppLifecycleService extends WidgetsBindingObserver {
 }
 
 // Provider for AppLifecycleService
-final appLifecycleServiceProvider = Provider<AppLifecycleService>((ref) {
+@Riverpod(keepAlive: true)
+AppLifecycleService appLifecycle(AppLifecycleRef ref) {
   final service = AppLifecycleService(ref);
 
   // Automatically dispose when no longer needed
@@ -103,4 +106,4 @@ final appLifecycleServiceProvider = Provider<AppLifecycleService>((ref) {
   });
 
   return service;
-});
+}

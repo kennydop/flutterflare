@@ -16,6 +16,9 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		DEC7AA6B2D84E95B00DF04BC /* LaunchScreenProd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC7AA662D84E95B00DF04BC /* LaunchScreenProd.storyboard */; };
+		DEC7AA6C2D84E95B00DF04BC /* LaunchScreenStaging.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC7AA672D84E95B00DF04BC /* LaunchScreenStaging.storyboard */; };
+		DEC7AA6D2D84E95B00DF04BC /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC7AA652D84E95B00DF04BC /* LaunchScreenDev.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		A6831DE9FB924B80653B6508 /* Pods-RunnerTests.profile-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-staging.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-staging.xcconfig"; sourceTree = "<group>"; };
 		A8F9CED025DA0FBAB3C10821 /* Pods-RunnerTests.debug-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-prod.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-prod.xcconfig"; sourceTree = "<group>"; };
 		B514D0B2FFF95E9F66DA45A5 /* Pods-Runner.debug-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-prod.xcconfig"; sourceTree = "<group>"; };
+		DEC7AA682D84E95B00DF04BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenStaging.storyboard; sourceTree = "<group>"; };
+		DEC7AA692D84E95B00DF04BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenDev.storyboard; sourceTree = "<group>"; };
+		DEC7AA6A2D84E95B00DF04BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenProd.storyboard; sourceTree = "<group>"; };
 		E284F245FDCE4BFD56F276B2 /* Pods-RunnerTests.release-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-prod.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-prod.xcconfig"; sourceTree = "<group>"; };
 		FA4B0A5D975B60924ED891E1 /* Pods-RunnerTests.profile-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-dev.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +214,9 @@
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
+				DEC7AA652D84E95B00DF04BC /* LaunchScreenDev.storyboard */,
+				DEC7AA662D84E95B00DF04BC /* LaunchScreenProd.storyboard */,
+				DEC7AA672D84E95B00DF04BC /* LaunchScreenStaging.storyboard */,
 				97C147021CF9000F007C117D /* Info.plist */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
@@ -321,6 +330,9 @@
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
+				DEC7AA6B2D84E95B00DF04BC /* LaunchScreenProd.storyboard in Resources */,
+				DEC7AA6C2D84E95B00DF04BC /* LaunchScreenStaging.storyboard in Resources */,
+				DEC7AA6D2D84E95B00DF04BC /* LaunchScreenDev.storyboard in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +532,30 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		DEC7AA652D84E95B00DF04BC /* LaunchScreenDev.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEC7AA692D84E95B00DF04BC /* Base */,
+			);
+			name = LaunchScreenDev.storyboard;
+			sourceTree = "<group>";
+		};
+		DEC7AA662D84E95B00DF04BC /* LaunchScreenProd.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEC7AA6A2D84E95B00DF04BC /* Base */,
+			);
+			name = LaunchScreenProd.storyboard;
+			sourceTree = "<group>";
+		};
+		DEC7AA672D84E95B00DF04BC /* LaunchScreenStaging.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEC7AA682D84E95B00DF04BC /* Base */,
+			);
+			name = LaunchScreenStaging.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -591,6 +627,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.55427911593-5umhfikaba8qt20iea225l0ohcv298vu";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenProd;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -779,6 +816,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.55427911593-5umhfikaba8qt20iea225l0ohcv298vu";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenProd;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -806,6 +844,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.55427911593-5umhfikaba8qt20iea225l0ohcv298vu";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenProd;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -890,6 +929,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.95569200940-jibu18epn2sejubh5m741v1h27tdr7np";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenDev;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -992,6 +1032,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.95569200940-jibu18epn2sejubh5m741v1h27tdr7np";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenStaging;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1091,6 +1132,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.95569200940-jibu18epn2sejubh5m741v1h27tdr7np";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenDev;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1188,6 +1230,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.95569200940-jibu18epn2sejubh5m741v1h27tdr7np";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenStaging;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1285,6 +1328,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.95569200940-jibu18epn2sejubh5m741v1h27tdr7np";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenDev;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1381,6 +1425,7 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.95569200940-jibu18epn2sejubh5m741v1h27tdr7np";
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenStaging;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

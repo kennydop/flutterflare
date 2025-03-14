@@ -15,7 +15,7 @@ import 'package:flutterflare/shared/widgets/app_loading_screen.dart';
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authStateProvider);
+  final authState = ref.watch(authProvider);
   final localStorage = ref.watch(localStorageProvider);
 
   return GoRouter(
@@ -25,15 +25,8 @@ final routerProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       // Show loading screen until auth state is determined
       final isLoading = authState.isLoading;
-      final isLoggedIn = authState.valueOrNull != null;
+      final isLoggedIn = authState.user != null;
       final isLoadingScreen = state.matchedLocation == '/loading';
-
-      // If auth state is loading, stay on loading screen
-      if (isLoading) {
-        return isLoadingScreen ? null : '/loading';
-      }
-
-      // Now we have auth state, handle redirection
       final isAuthRoute =
           state.matchedLocation == LoginView.routePath ||
           state.matchedLocation == RegisterView.routePath ||
@@ -41,36 +34,44 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isWelcomeRoute = state.matchedLocation == WelcomeView.routePath;
       final isOnboardingRoute =
           state.matchedLocation == OnboardingView.routePath;
+      final hasCompletedOnboarding = localStorage.hasOnboardingCompleted();
 
-      // Don't stay on loading screen once we have auth state
+      // If auth state is loading, stay on loading screen
+      if (isLoading) {
+        return isLoadingScreen ? null : '/loading';
+      }
+
+      // Auth state is resolved, handle redirections
+
+      // 1. Handle loading screen redirections
       if (isLoadingScreen) {
-        // If onboarding hasn't been completed, go to onboarding
-        if (!localStorage.hasOnboardingCompleted()) {
+        if (!hasCompletedOnboarding) {
           return OnboardingView.routePath;
         }
-
-        // If logged in, go to home, else go to welcome
         return isLoggedIn ? HomeView.routePath : WelcomeView.routePath;
       }
 
-      // If onboarding hasn't been completed and not on onboarding route, redirect to onboarding
-      if (!localStorage.hasOnboardingCompleted() && !isOnboardingRoute) {
+      // 2. Handle onboarding redirections
+      if (!hasCompletedOnboarding && !isOnboardingRoute) {
         return OnboardingView.routePath;
       }
 
-      // If not logged in and not on an auth route or welcome route or onboarding route, redirect to welcome
-      if (!isLoggedIn &&
-          !isAuthRoute &&
-          !isWelcomeRoute &&
-          !isOnboardingRoute) {
-        return WelcomeView.routePath;
+      // 3. Handle authentication redirections
+      if (!isLoggedIn) {
+        // If not logged in, only allow access to public routes
+        final isPublicRoute =
+            isAuthRoute || isWelcomeRoute || isOnboardingRoute;
+        if (!isPublicRoute) {
+          return WelcomeView.routePath;
+        }
+      } else {
+        // If logged in, redirect away from auth and welcome routes
+        if (isAuthRoute || isWelcomeRoute) {
+          return HomeView.routePath;
+        }
       }
 
-      // If logged in and on an auth route or welcome route, redirect to home
-      if (isLoggedIn && (isAuthRoute || isWelcomeRoute)) {
-        return HomeView.routePath;
-      }
-
+      // Allow the navigation to proceed
       return null;
     },
     routes: [

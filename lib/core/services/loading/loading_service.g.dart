@@ -6,6 +6,25 @@ part of 'loading_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$loadingOverlayGlobalHash() =>
+    r'9107379bfc1f5ee1f88ae9b985596cc4dee3974a';
+
+/// See also [loadingOverlayGlobal].
+@ProviderFor(loadingOverlayGlobal)
+final loadingOverlayGlobalProvider = Provider<bool>.internal(
+  loadingOverlayGlobal,
+  name: r'loadingOverlayGlobalProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$loadingOverlayGlobalHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef LoadingOverlayGlobalRef = ProviderRef<bool>;
 String _$loadingOverlayHash() => r'3a8737b7a3048aca498455f2a7cf335b46b23388';
 
 /// See also [LoadingOverlay].

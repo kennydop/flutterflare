@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflare/core/configs/app_config.dart';
+import 'package:flutterflare/core/constants/app_sizes.dart';
+import 'package:flutterflare/shared/widgets/device_info_dialog.dart';
 
 class FlavorBanner extends StatelessWidget {
   final Widget child;
@@ -10,7 +12,10 @@ class FlavorBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     if (AppConfig.environment == Environment.prod) return child;
     bannerConfig ??= _getDefaultBanner();
-    return Stack(children: <Widget>[child, _buildBanner(context)]);
+    return Stack(
+      textDirection: TextDirection.ltr,
+      children: <Widget>[child, _buildBanner(context)],
+    );
   }
 
   BannerConfig _getDefaultBanner() {
@@ -26,18 +31,29 @@ class FlavorBanner extends StatelessWidget {
   }
 
   Widget _buildBanner(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      child: CustomPaint(
-        painter: BannerPainter(
-          message: bannerConfig!.bannerName.toUpperCase(),
-          textDirection: Directionality.of(context),
-          layoutDirection: Directionality.of(context),
-          location: BannerLocation.topStart,
-          color: bannerConfig!.bannerColor,
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      child: SizedBox(
+        width: AppSizes.s50,
+        height: AppSizes.s50,
+        child: CustomPaint(
+          painter: BannerPainter(
+            message: bannerConfig!.bannerName.toUpperCase(),
+            textDirection: Directionality.of(context),
+            layoutDirection: Directionality.of(context),
+            location: BannerLocation.topStart,
+            color: bannerConfig!.bannerColor,
+          ),
         ),
       ),
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return DeviceInfoDialog(bannerConfig: bannerConfig!);
+          },
+        );
+      },
     );
   }
 }

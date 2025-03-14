@@ -46,18 +46,18 @@ class AppTheme {
       dividerTheme: const DividerThemeData(color: AppColors.divider),
       listTileTheme: const ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(
-          horizontal: AppSizes.m16,
-          vertical: AppSizes.m8,
+          horizontal: AppSizes.s16,
+          vertical: AppSizes.s8,
         ),
       ),
       cardTheme: const CardTheme(
         color: AppColors.surfaceLight,
         elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: AppSizes.r16Radius),
+        shape: RoundedRectangleBorder(borderRadius: AppSizes.r16),
       ),
       iconTheme: const IconThemeData(color: AppColors.gray500),
       buttonTheme: const ButtonThemeData(
-        shape: RoundedRectangleBorder(borderRadius: AppSizes.r8Radius),
+        shape: RoundedRectangleBorder(borderRadius: AppSizes.r8),
         buttonColor: AppColors.primaryLight,
         textTheme: ButtonTextTheme.primary,
         height: AppSizes.s48,
@@ -65,31 +65,31 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         focusColor: AppColors.primaryLight,
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppSizes.m16,
-          vertical: AppSizes.m8,
+          horizontal: AppSizes.s16,
+          vertical: AppSizes.s8,
         ),
         iconColor: AppColors.textHeading,
-        border: const OutlineInputBorder(borderRadius: AppSizes.r8Radius),
+        border: const OutlineInputBorder(borderRadius: AppSizes.r8),
         filled: true,
         fillColor: AppColors.gray100,
         enabledBorder: const OutlineInputBorder(
-          borderRadius: AppSizes.r8Radius,
+          borderRadius: AppSizes.r8,
           borderSide: BorderSide(color: AppColors.gray300),
         ),
         focusedBorder: const OutlineInputBorder(
-          borderRadius: AppSizes.r8Radius,
+          borderRadius: AppSizes.r8,
           borderSide: BorderSide(color: AppColors.primaryLight),
         ),
         errorBorder: const OutlineInputBorder(
-          borderRadius: AppSizes.r8Radius,
+          borderRadius: AppSizes.r8,
           borderSide: BorderSide(color: AppColors.error),
         ),
         focusedErrorBorder: const OutlineInputBorder(
-          borderRadius: AppSizes.r8Radius,
+          borderRadius: AppSizes.r8,
           borderSide: BorderSide(color: AppColors.error),
         ),
         disabledBorder: const OutlineInputBorder(
-          borderRadius: AppSizes.r8Radius,
+          borderRadius: AppSizes.r8,
           borderSide: BorderSide(color: AppColors.gray100),
         ),
         hintStyle: AppTextStyles.body2.copyWith(color: AppColors.placeholder),
@@ -99,12 +99,12 @@ class AppTheme {
       ),
       chipTheme: ChipThemeData(
         elevation: 0,
-        shape: const RoundedRectangleBorder(borderRadius: AppSizes.r8Radius),
+        shape: const RoundedRectangleBorder(borderRadius: AppSizes.r8),
         selectedColor: AppColors.primaryLight,
         checkmarkColor: AppColors.textOnPrimary,
         labelStyle: AppTextStyles.body2.copyWith(
           color: const ChipLabelColor(),
-          fontSize: AppSizes.fontSize14,
+          fontSize: AppSizes.s14,
           fontWeight: FontWeight.w500,
         ),
       ),

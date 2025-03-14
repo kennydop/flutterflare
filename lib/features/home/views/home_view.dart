@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
+import 'package:flutterflare/features/auth/views/user_profile_view.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +48,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               Button(
                 label: 'View Profile',
                 onPressed: () {
-                  context.goNamed('profile');
+                  context.push(UserProfileView.routePath);
                 },
               ),
               const SizedBox(height: 16),

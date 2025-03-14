@@ -38,7 +38,7 @@ class Toast {
       description: Text(message),
       alignment: Alignment.topCenter,
       autoCloseDuration: const Duration(seconds: 4),
-      borderRadius: AppSizes.r12Radius,
+      borderRadius: AppSizes.r12,
       boxShadow: lowModeShadow,
       closeOnClick: false,
       primaryColor:
@@ -70,7 +70,7 @@ class Toast {
       alignment: Alignment.topCenter,
       icon: imageUrl != null ? Image.network(imageUrl) : null,
       autoCloseDuration: duration ?? const Duration(seconds: 8),
-      borderRadius: AppSizes.r12Radius,
+      borderRadius: AppSizes.r12,
       boxShadow: lowModeShadow,
       closeOnClick: false,
     );
