@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutterflare/core/constants/app_strings.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/features/auth/views/user_profile_view.dart';
 import 'package:flutterflare/shared/widgets/buttons/button.dart';
@@ -28,7 +29,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
-              context.goNamed('profile');
+              context.push(UserProfileView.routePath);
             },
           ),
         ],
@@ -41,7 +42,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             children: [
               if (user != null)
                 Text(
-                  'Welcome, ${user.firstName ?? 'User'}!',
+                  '${AppStrings.welcome}, ${user.firstName ?? 'User'}!',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               const SizedBox(height: 24),

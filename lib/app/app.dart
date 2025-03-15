@@ -10,13 +10,13 @@ import 'package:flutterflare/core/configs/flavor_banner.dart';
 import 'package:flutterflare/core/logger/logger.dart';
 import 'package:flutterflare/core/router/app_router.dart';
 import 'package:flutterflare/core/services/lifecycle/app_lifecycle_service.dart';
-import 'package:flutterflare/core/services/connectivity/network_connectivity_service.dart';
 import 'package:flutterflare/core/services/storage/local_storage_service.dart';
 import 'package:flutterflare/core/theme/app_theme.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/firebase_options.dart';
 import 'package:flutterflare/shared/widgets/app_error_widget.dart';
 import 'package:flutterflare/shared/widgets/loading_overlay_widget.dart';
+import 'package:flutterflare/shared/widgets/internet_status_listener.dart';
 import 'package:toastification/toastification.dart';
 
 bool removeSplash = false;
@@ -46,7 +46,7 @@ class App extends ConsumerWidget {
             ErrorWidget.builder = (errorDetails) {
               return const AppErrorWidget();
             };
-            return FlavorBanner(child: child!);
+            return InternetStatusListener(child: FlavorBanner(child: child!));
           },
           theme: AppTheme.light,
           // darkTheme: AppTheme.dark,

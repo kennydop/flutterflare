@@ -8,19 +8,24 @@ class AppErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const Image(
-            image: AssetImage(AppImages.error),
-            height: AppSizes.s100,
-          ),
-          AppSizes.gapH20,
-          Text(
-            AppStrings.errorOccurred,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-        ],
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Image(
+              image: AssetImage(AppImages.error),
+              height: AppSizes.s100,
+            ),
+            AppSizes.gapH20,
+            Text(
+              AppStrings.errorOccurred,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -55,4 +55,8 @@ class AppStrings {
   static const String rememberYourPassword = 'Remember your password?';
   static const String errorOccurred = 'An error occurred';
   static const String deviceInfo = 'Device Info';
+  static const String internetConnectionRestored =
+      'Internet connection restored';
+  static const String noInternetConnection = 'No internet connection';
+  static const String welcome = 'Welcome';
 }
