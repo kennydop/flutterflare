@@ -14,12 +14,13 @@ import 'package:flutterflare/core/services/storage/local_storage_service.dart';
 import 'package:flutterflare/core/theme/app_theme.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/firebase_options.dart';
+import 'package:flutterflare/core/services/notification/notification_service.dart';
 import 'package:flutterflare/shared/widgets/app_error_widget.dart';
 import 'package:flutterflare/shared/widgets/loading_overlay_widget.dart';
 import 'package:flutterflare/shared/widgets/internet_status_listener.dart';
 import 'package:toastification/toastification.dart';
 
-bool removeSplash = false;
+bool removedSplash = false;
 
 class App extends ConsumerWidget {
   const App({super.key});
@@ -30,10 +31,14 @@ class App extends ConsumerWidget {
     ref.watch(appLifecycleProvider);
     final auth = ref.watch(authProvider);
 
+    // Access notification service to ensure it's initialized
+    ref.watch(notificationServiceProvider);
+
     final router = ref.watch(routerProvider);
 
-    if (auth.isInitialized && !removeSplash) {
-      removeSplash = true;
+    // Only remove splash when auth is initialized and we haven't removed it yet
+    if (auth.isInitialized && !removedSplash) {
+      removedSplash = true;
       FlutterNativeSplash.remove();
       logger.d('******* Splash removed *******');
     }
@@ -68,6 +73,12 @@ Future<void> initializeApp() async {
   // Initialize local storage service
   final localStorage = localStorageProvider.read(ProviderContainer());
   await localStorage.init();
+
+  // Initialize notification service
+  final notificationService = notificationServiceProvider.read(
+    ProviderContainer(),
+  );
+  await notificationService.initialize();
 
   // Initialize Crashlytics
   if (Env.enableCrashlytics) {

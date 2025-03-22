@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- String get uid; String get email; String? get firstName; String? get lastName; String? get photoURL; bool get emailVerified; String? get phoneNumber; String? get bio; List<String> get roles; Map<String, dynamic>? get preferences; String? get provider; DateTime? get createdAt; DateTime? get updatedAt; DateTime? get lastLoginAt; bool get isOnline;
+ String get uid; String get email; String? get firstName; String? get lastName; String? get photoURL; bool get emailVerified; String? get phoneNumber; String? get bio; List<String> get roles; Map<String, dynamic>? get preferences; String? get provider; DateTime? get createdAt; DateTime? get updatedAt; DateTime? get lastLoginAt; bool get isOnline; List<String> get fcmTokens;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $UserModelCopyWith<UserModel> get copyWith => _$UserModelCopyWithImpl<UserModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.photoURL, photoURL) || other.photoURL == photoURL)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.bio, bio) || other.bio == bio)&&const DeepCollectionEquality().equals(other.roles, roles)&&const DeepCollectionEquality().equals(other.preferences, preferences)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastLoginAt, lastLoginAt) || other.lastLoginAt == lastLoginAt)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.photoURL, photoURL) || other.photoURL == photoURL)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.bio, bio) || other.bio == bio)&&const DeepCollectionEquality().equals(other.roles, roles)&&const DeepCollectionEquality().equals(other.preferences, preferences)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastLoginAt, lastLoginAt) || other.lastLoginAt == lastLoginAt)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&const DeepCollectionEquality().equals(other.fcmTokens, fcmTokens));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,email,firstName,lastName,photoURL,emailVerified,phoneNumber,bio,const DeepCollectionEquality().hash(roles),const DeepCollectionEquality().hash(preferences),provider,createdAt,updatedAt,lastLoginAt,isOnline);
+int get hashCode => Object.hash(runtimeType,uid,email,firstName,lastName,photoURL,emailVerified,phoneNumber,bio,const DeepCollectionEquality().hash(roles),const DeepCollectionEquality().hash(preferences),provider,createdAt,updatedAt,lastLoginAt,isOnline,const DeepCollectionEquality().hash(fcmTokens));
 
 @override
 String toString() {
-  return 'UserModel(uid: $uid, email: $email, firstName: $firstName, lastName: $lastName, photoURL: $photoURL, emailVerified: $emailVerified, phoneNumber: $phoneNumber, bio: $bio, roles: $roles, preferences: $preferences, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt, lastLoginAt: $lastLoginAt, isOnline: $isOnline)';
+  return 'UserModel(uid: $uid, email: $email, firstName: $firstName, lastName: $lastName, photoURL: $photoURL, emailVerified: $emailVerified, phoneNumber: $phoneNumber, bio: $bio, roles: $roles, preferences: $preferences, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt, lastLoginAt: $lastLoginAt, isOnline: $isOnline, fcmTokens: $fcmTokens)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- String uid, String email, String? firstName, String? lastName, String? photoURL, bool emailVerified, String? phoneNumber, String? bio, List<String> roles, Map<String, dynamic>? preferences, String? provider, DateTime? createdAt, DateTime? updatedAt, DateTime? lastLoginAt, bool isOnline
+ String uid, String email, String? firstName, String? lastName, String? photoURL, bool emailVerified, String? phoneNumber, String? bio, List<String> roles, Map<String, dynamic>? preferences, String? provider, DateTime? createdAt, DateTime? updatedAt, DateTime? lastLoginAt, bool isOnline, List<String> fcmTokens
 });
 
 
@@ -66,7 +66,7 @@ class _$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? email = null,Object? firstName = freezed,Object? lastName = freezed,Object? photoURL = freezed,Object? emailVerified = null,Object? phoneNumber = freezed,Object? bio = freezed,Object? roles = null,Object? preferences = freezed,Object? provider = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? lastLoginAt = freezed,Object? isOnline = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? email = null,Object? firstName = freezed,Object? lastName = freezed,Object? photoURL = freezed,Object? emailVerified = null,Object? phoneNumber = freezed,Object? bio = freezed,Object? roles = null,Object? preferences = freezed,Object? provider = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? lastLoginAt = freezed,Object? isOnline = null,Object? fcmTokens = null,}) {
   return _then(_self.copyWith(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -83,7 +83,8 @@ as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // igno
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,lastLoginAt: freezed == lastLoginAt ? _self.lastLoginAt : lastLoginAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,isOnline: null == isOnline ? _self.isOnline : isOnline // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,fcmTokens: null == fcmTokens ? _self.fcmTokens : fcmTokens // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -94,7 +95,7 @@ as bool,
 @JsonSerializable()
 
 class _UserModel implements UserModel {
-  const _UserModel({required this.uid, required this.email, this.firstName, this.lastName, this.photoURL, this.emailVerified = false, this.phoneNumber, this.bio, final  List<String> roles = const [], final  Map<String, dynamic>? preferences, this.provider, this.createdAt, this.updatedAt, this.lastLoginAt, this.isOnline = false}): _roles = roles,_preferences = preferences;
+  const _UserModel({required this.uid, required this.email, this.firstName, this.lastName, this.photoURL, this.emailVerified = false, this.phoneNumber, this.bio, final  List<String> roles = const [], final  Map<String, dynamic>? preferences, this.provider, this.createdAt, this.updatedAt, this.lastLoginAt, this.isOnline = false, final  List<String> fcmTokens = const []}): _roles = roles,_preferences = preferences,_fcmTokens = fcmTokens;
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String uid;
@@ -126,6 +127,13 @@ class _UserModel implements UserModel {
 @override final  DateTime? updatedAt;
 @override final  DateTime? lastLoginAt;
 @override@JsonKey() final  bool isOnline;
+ final  List<String> _fcmTokens;
+@override@JsonKey() List<String> get fcmTokens {
+  if (_fcmTokens is EqualUnmodifiableListView) return _fcmTokens;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_fcmTokens);
+}
+
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -140,16 +148,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.photoURL, photoURL) || other.photoURL == photoURL)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.bio, bio) || other.bio == bio)&&const DeepCollectionEquality().equals(other._roles, _roles)&&const DeepCollectionEquality().equals(other._preferences, _preferences)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastLoginAt, lastLoginAt) || other.lastLoginAt == lastLoginAt)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.email, email) || other.email == email)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.photoURL, photoURL) || other.photoURL == photoURL)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.bio, bio) || other.bio == bio)&&const DeepCollectionEquality().equals(other._roles, _roles)&&const DeepCollectionEquality().equals(other._preferences, _preferences)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastLoginAt, lastLoginAt) || other.lastLoginAt == lastLoginAt)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&const DeepCollectionEquality().equals(other._fcmTokens, _fcmTokens));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,email,firstName,lastName,photoURL,emailVerified,phoneNumber,bio,const DeepCollectionEquality().hash(_roles),const DeepCollectionEquality().hash(_preferences),provider,createdAt,updatedAt,lastLoginAt,isOnline);
+int get hashCode => Object.hash(runtimeType,uid,email,firstName,lastName,photoURL,emailVerified,phoneNumber,bio,const DeepCollectionEquality().hash(_roles),const DeepCollectionEquality().hash(_preferences),provider,createdAt,updatedAt,lastLoginAt,isOnline,const DeepCollectionEquality().hash(_fcmTokens));
 
 @override
 String toString() {
-  return 'UserModel(uid: $uid, email: $email, firstName: $firstName, lastName: $lastName, photoURL: $photoURL, emailVerified: $emailVerified, phoneNumber: $phoneNumber, bio: $bio, roles: $roles, preferences: $preferences, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt, lastLoginAt: $lastLoginAt, isOnline: $isOnline)';
+  return 'UserModel(uid: $uid, email: $email, firstName: $firstName, lastName: $lastName, photoURL: $photoURL, emailVerified: $emailVerified, phoneNumber: $phoneNumber, bio: $bio, roles: $roles, preferences: $preferences, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt, lastLoginAt: $lastLoginAt, isOnline: $isOnline, fcmTokens: $fcmTokens)';
 }
 
 
@@ -160,7 +168,7 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String uid, String email, String? firstName, String? lastName, String? photoURL, bool emailVerified, String? phoneNumber, String? bio, List<String> roles, Map<String, dynamic>? preferences, String? provider, DateTime? createdAt, DateTime? updatedAt, DateTime? lastLoginAt, bool isOnline
+ String uid, String email, String? firstName, String? lastName, String? photoURL, bool emailVerified, String? phoneNumber, String? bio, List<String> roles, Map<String, dynamic>? preferences, String? provider, DateTime? createdAt, DateTime? updatedAt, DateTime? lastLoginAt, bool isOnline, List<String> fcmTokens
 });
 
 
@@ -177,7 +185,7 @@ class __$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? email = null,Object? firstName = freezed,Object? lastName = freezed,Object? photoURL = freezed,Object? emailVerified = null,Object? phoneNumber = freezed,Object? bio = freezed,Object? roles = null,Object? preferences = freezed,Object? provider = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? lastLoginAt = freezed,Object? isOnline = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? email = null,Object? firstName = freezed,Object? lastName = freezed,Object? photoURL = freezed,Object? emailVerified = null,Object? phoneNumber = freezed,Object? bio = freezed,Object? roles = null,Object? preferences = freezed,Object? provider = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? lastLoginAt = freezed,Object? isOnline = null,Object? fcmTokens = null,}) {
   return _then(_UserModel(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -194,7 +202,8 @@ as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // igno
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,lastLoginAt: freezed == lastLoginAt ? _self.lastLoginAt : lastLoginAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,isOnline: null == isOnline ? _self.isOnline : isOnline // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,fcmTokens: null == fcmTokens ? _self._fcmTokens : fcmTokens // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

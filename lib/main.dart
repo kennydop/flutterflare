@@ -11,36 +11,36 @@ import 'package:flutterflare/core/theme/app_colors.dart';
 import 'package:flutterflare/core/utils/device_utils.dart';
 
 // Apply system UI style to make app more immersive
-Future<void> redoSystemStyle([bool? darkMode]) async {
-  darkMode ??= false;
-  if (Platform.isAndroid) {
-    // Get the Android SDK version
-    final AndroidDeviceInfo androidInfo = await DeviceUtils.androidDeviceInfo();
-    final bool edgeToEdge = androidInfo.version.sdkInt >= 29;
+// Future<void> redoSystemStyle([bool? darkMode]) async {
+//   darkMode ??= false;
+//   if (Platform.isAndroid) {
+//     // Get the Android SDK version
+//     final AndroidDeviceInfo androidInfo = await DeviceUtils.androidDeviceInfo();
+//     final bool edgeToEdge = androidInfo.version.sdkInt >= 29;
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+//     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: darkMode ? Brightness.light : Brightness.dark,
-        systemNavigationBarColor:
-            !edgeToEdge
-                ? (darkMode ? AppColors.surfaceDark : AppColors.surfaceLight)
-                : Colors.transparent,
-        systemNavigationBarContrastEnforced: edgeToEdge,
-        systemNavigationBarIconBrightness:
-            darkMode ? Brightness.light : Brightness.dark,
-        // systemStatusBarContrastEnforced: true,
-        systemNavigationBarDividerColor: Colors.transparent,
-      ),
-    );
-  } else {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-    );
-  }
-}
+//     SystemChrome.setSystemUIOverlayStyle(
+//       SystemUiOverlayStyle(
+//         statusBarColor: Colors.transparent,
+//         statusBarIconBrightness: darkMode ? Brightness.light : Brightness.dark,
+//         systemNavigationBarColor:
+//             !edgeToEdge
+//                 ? (darkMode ? AppColors.surfaceDark : AppColors.surfaceLight)
+//                 : Colors.transparent,
+//         systemNavigationBarContrastEnforced: edgeToEdge,
+//         systemNavigationBarIconBrightness:
+//             darkMode ? Brightness.light : Brightness.dark,
+//         // systemStatusBarContrastEnforced: true,
+//         systemNavigationBarDividerColor: Colors.transparent,
+//       ),
+//     );
+//   } else {
+//     SystemChrome.setSystemUIOverlayStyle(
+//       const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+//     );
+//   }
+// }
 
 void main() async {
   // Initialize Flutter binding
@@ -49,8 +49,8 @@ void main() async {
   // Preserve splash screen until auth is loaded
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // Configure system UI style
-  await redoSystemStyle();
+  // // Configure system UI style
+  // await redoSystemStyle();
 
   // Set environment
   AppConfig.environment = _getEnvironmentFromString(appFlavor);

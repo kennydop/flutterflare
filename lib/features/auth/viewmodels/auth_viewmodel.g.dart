@@ -6,11 +6,11 @@ part of 'auth_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authStateHash() => r'01b51926985334b2102fcaca81bd7623aee498c8';
+String _$authStateHash() => r'0857524f232f9928d4c0deb50cb3ef1578d1b7b9';
 
 /// See also [authState].
 @ProviderFor(authState)
-final authStateProvider = AutoDisposeStreamProvider<UserModel?>.internal(
+final authStateProvider = StreamProvider<UserModel?>.internal(
   authState,
   name: r'authStateProvider',
   debugGetCreateSourceHash:
@@ -21,8 +21,26 @@ final authStateProvider = AutoDisposeStreamProvider<UserModel?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AuthStateRef = AutoDisposeStreamProviderRef<UserModel?>;
-String _$authHash() => r'f17b64410b0cd1d0db209a154c89de98ec03d2d6';
+typedef AuthStateRef = StreamProviderRef<UserModel?>;
+String _$authErrorHandlerHash() => r'cbbdff5e37fd8dcc3d3826b24c9a8a785be9ad71';
+
+/// See also [authErrorHandler].
+@ProviderFor(authErrorHandler)
+final authErrorHandlerProvider = Provider<Object?>.internal(
+  authErrorHandler,
+  name: r'authErrorHandlerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$authErrorHandlerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AuthErrorHandlerRef = ProviderRef<Object?>;
+String _$authHash() => r'bbbdd76d179d1411128c5f4d294961202425fff1';
 
 /// See also [Auth].
 @ProviderFor(Auth)

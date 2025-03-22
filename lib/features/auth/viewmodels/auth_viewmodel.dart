@@ -7,19 +7,19 @@ import 'package:flutterflare/core/services/notification/toast_service.dart';
 
 part 'auth_viewmodel.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Stream<UserModel?> authState(AuthStateRef ref) {
   return ref.watch(authRepositoryProvider).authStateChanges();
 }
 
-// For handling auth errors in a centralized way
-final authErrorHandlerProvider = Provider<void>((ref) {
+@Riverpod(keepAlive: true)
+authErrorHandler(AuthErrorHandlerRef ref) {
   ref.listen<AuthState>(authProvider, (previous, next) {
     if (next.error != null && (previous?.error != next.error)) {
       Toast.showError(next.error!);
     }
   });
-});
+}
 
 class AuthState {
   final bool isInitialized;
@@ -58,7 +58,7 @@ class Auth extends _$Auth {
 
     _initialize();
 
-    return const AuthState(isLoading: true, isInitialized: false);
+    return state;
   }
 
   Future<void> _initialize() async {
@@ -200,7 +200,7 @@ class Auth extends _$Auth {
     state = state.copyWith(isLoading: true, error: null);
     try {
       await ref.read(authRepositoryProvider).signOut();
-      state = const AuthState();
+      state = const AuthState(isInitialized: true);
     } on AuthException catch (e) {
       state = state.copyWith(isLoading: false, error: e.message);
     } catch (e) {

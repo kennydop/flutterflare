@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutterflare/core/configs/env.dart';
-
 enum Environment { dev, staging, prod }
 
 class AppConfig {

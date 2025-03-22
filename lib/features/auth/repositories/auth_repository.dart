@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
 import 'package:flutterflare/core/logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutterflare/core/exceptions/app_exception.dart';
 import 'package:flutterflare/features/auth/models/user_model.dart';
 import 'package:flutterflare/features/auth/repositories/user_repository.dart';
+import 'package:flutterflare/core/services/notification/notification_service.dart';
+import 'package:flutterflare/core/services/notification/token_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 part 'auth_repository.g.dart';
@@ -18,10 +19,18 @@ FirebaseAuth firebaseAuth(FirebaseAuthRef ref) {
 class AuthRepository {
   final FirebaseAuth _auth;
   final UserRepository _userRepository;
+  final TokenService _tokenService;
+  final NotificationService? _notificationService;
 
-  AuthRepository({FirebaseAuth? auth, UserRepository? userRepository})
-    : _auth = auth ?? FirebaseAuth.instance,
-      _userRepository = userRepository ?? UserRepository();
+  AuthRepository({
+    FirebaseAuth? auth,
+    UserRepository? userRepository,
+    TokenService? tokenService,
+    NotificationService? notificationService,
+  }) : _auth = auth ?? FirebaseAuth.instance,
+       _userRepository = userRepository ?? UserRepository(),
+       _tokenService = tokenService ?? TokenService(),
+       _notificationService = notificationService;
 
   Stream<UserModel?> authStateChanges() {
     return _auth.authStateChanges().asyncMap((user) async {
@@ -30,6 +39,10 @@ class AuthRepository {
       // Fetch the user data from Firestore
       try {
         final firestoreUser = await _userRepository.getUser(user.uid);
+
+        // Update FCM token for the user
+        _updateFcmToken();
+
         if (firestoreUser != null) {
           return firestoreUser;
         }
@@ -63,6 +76,9 @@ class AuthRepository {
       // Fetch user data from Firestore
       final user = userCredential.user!;
       final firestoreUser = await _userRepository.getUser(user.uid);
+
+      // Update FCM token
+      _updateFcmToken();
 
       if (firestoreUser != null) {
         // Update the last login time and isOnline status
@@ -123,6 +139,9 @@ class AuthRepository {
       // Save the user data to Firestore
       await _userRepository.saveUser(userModel);
 
+      // Update FCM token
+      _updateFcmToken();
+
       return userModel;
     } on FirebaseAuthException catch (e) {
       logger.e('Error creating user with email and password: $e');
@@ -163,6 +182,9 @@ class AuthRepository {
       final user = userCredential.user!;
       final firestoreUser = await _userRepository.getUser(user.uid);
 
+      // Update FCM token
+      _updateFcmToken();
+
       if (firestoreUser != null) {
         // Update the last login time and isOnline status
         await _userRepository.updateUser(user.uid, {
@@ -193,6 +215,9 @@ class AuthRepository {
 
   Future<void> signOut() async {
     try {
+      // Get the current FCM token before signing out
+      final token = await _notificationService?.getToken();
+
       // Update isOnline status to false before signing out
       final currentUser = _auth.currentUser;
       if (currentUser != null) {
@@ -200,6 +225,11 @@ class AuthRepository {
           'isOnline': false,
           'lastLoginAt': DateTime.now().toIso8601String(),
         });
+
+        // Remove FCM token if available
+        if (token != null) {
+          await _tokenService.removeToken(token);
+        }
       }
 
       await _auth.signOut();
@@ -218,6 +248,18 @@ class AuthRepository {
     } catch (e) {
       logger.e('Error sending password reset email: $e');
       throw AuthException(AppStrings.failedToSendPasswordResetEmail);
+    }
+  }
+
+  /// Updates the FCM token for the current user
+  Future<void> _updateFcmToken() async {
+    try {
+      final token = await _notificationService?.getToken();
+      if (token != null) {
+        await _tokenService.updateToken(token);
+      }
+    } catch (e) {
+      logger.e('Error updating FCM token: $e');
     }
   }
 
@@ -256,5 +298,12 @@ class AuthRepository {
 AuthRepository authRepository(AuthRepositoryRef ref) {
   final auth = ref.watch(firebaseAuthProvider);
   final userRepository = ref.watch(userRepositoryProvider);
-  return AuthRepository(auth: auth, userRepository: userRepository);
+  final tokenService = ref.watch(tokenServiceProvider);
+  final notificationService = ref.watch(notificationServiceProvider);
+  return AuthRepository(
+    auth: auth,
+    userRepository: userRepository,
+    tokenService: tokenService,
+    notificationService: notificationService,
+  );
 }

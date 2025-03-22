@@ -4,6 +4,7 @@ import 'package:flutterflare/core/services/storage/local_storage_service.dart';
 import 'package:flutterflare/features/auth/views/user_profile_view.dart';
 import 'package:flutterflare/features/home/views/home_view.dart';
 import 'package:flutterflare/features/onboarding/views/onboarding_view.dart';
+import 'package:flutterflare/features/settings/views/notification_settings_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/features/auth/views/login_view.dart';
@@ -15,18 +16,21 @@ import 'package:flutterflare/shared/widgets/app_loading_screen.dart';
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authProvider);
+  final authState = ref.watch(authStateProvider);
   final localStorage = ref.watch(localStorageProvider);
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/loading',
+    initialLocation: AppLoadingScreen.routePath,
     debugLogDiagnostics: true,
     redirect: (context, state) {
-      // Show loading screen until auth state is determined
-      final isLoading = authState.isLoading;
-      final isLoggedIn = authState.user != null;
-      final isLoadingScreen = state.matchedLocation == '/loading';
+      // If the auth state is loading, show a loading screen
+      if (authState.isLoading) {
+        return null;
+      }
+      final isLoggedIn = authState.valueOrNull != null;
+      final isLoadingScreen =
+          state.matchedLocation == AppLoadingScreen.routePath;
       final isAuthRoute =
           state.matchedLocation == LoginView.routePath ||
           state.matchedLocation == RegisterView.routePath ||
@@ -35,13 +39,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isOnboardingRoute =
           state.matchedLocation == OnboardingView.routePath;
       final hasCompletedOnboarding = localStorage.hasOnboardingCompleted();
-
-      // If auth state is loading, stay on loading screen
-      if (isLoading) {
-        return isLoadingScreen ? null : '/loading';
-      }
-
-      // Auth state is resolved, handle redirections
 
       // 1. Handle loading screen redirections
       if (isLoadingScreen) {
@@ -77,27 +74,23 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       // Loading screen route
       GoRoute(
-        path: '/loading',
+        path: AppLoadingScreen.routePath,
         builder: (context, state) => const AppLoadingScreen(),
       ),
       GoRoute(
         path: OnboardingView.routePath,
-        name: OnboardingView.routePath,
         builder: (context, state) => const OnboardingView(),
       ),
       GoRoute(
         path: WelcomeView.routePath,
-        name: WelcomeView.routePath,
         builder: (context, state) => const WelcomeView(),
       ),
       GoRoute(
         path: HomeView.routePath,
-        name: HomeView.routePath,
         builder: (context, state) => const HomeView(),
       ),
       GoRoute(
         path: LoginView.routePath,
-        name: LoginView.routePath,
         builder: (context, state) {
           final previousRoutePath = state.extra as String?;
           if (previousRoutePath == null) {
@@ -108,7 +101,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: RegisterView.routePath,
-        name: RegisterView.routePath,
         builder: (context, state) {
           final previousRoutePath = state.extra as String?;
           if (previousRoutePath == null) {
@@ -119,13 +111,16 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: ForgotPasswordView.routePath,
-        name: ForgotPasswordView.routePath,
         builder: (context, state) => const ForgotPasswordView(),
       ),
       GoRoute(
         path: '/profile',
         name: 'profile',
         builder: (context, state) => const UserProfileView(),
+      ),
+      GoRoute(
+        path: NotificationSettingsView.routePath,
+        builder: (context, state) => const NotificationSettingsView(),
       ),
     ],
     errorBuilder:

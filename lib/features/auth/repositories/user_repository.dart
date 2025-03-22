@@ -12,7 +12,7 @@ FirebaseFirestore firestore(FirestoreRef ref) {
 
 class UserRepository {
   final FirebaseFirestore _firestore;
-  final String _collection = 'users';
+  static const String collection = 'users';
 
   UserRepository({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;
@@ -21,7 +21,7 @@ class UserRepository {
   Future<void> saveUser(UserModel user) async {
     try {
       await _firestore
-          .collection(_collection)
+          .collection(collection)
           .doc(user.uid)
           .set(user.toJson(), SetOptions(merge: true));
     } catch (e) {
@@ -34,7 +34,7 @@ class UserRepository {
   Future<UserModel?> getUser(String uid) async {
     try {
       final docSnapshot =
-          await _firestore.collection(_collection).doc(uid).get();
+          await _firestore.collection(collection).doc(uid).get();
       if (docSnapshot.exists && docSnapshot.data() != null) {
         return UserModel.fromJson(docSnapshot.data()!);
       }
@@ -47,7 +47,7 @@ class UserRepository {
 
   /// Stream user data changes from Firestore
   Stream<UserModel?> userStream(String uid) {
-    return _firestore.collection(_collection).doc(uid).snapshots().map((
+    return _firestore.collection(collection).doc(uid).snapshots().map((
       snapshot,
     ) {
       if (snapshot.exists && snapshot.data() != null) {
@@ -60,7 +60,7 @@ class UserRepository {
   /// Update user data in Firestore
   Future<void> updateUser(String uid, Map<String, dynamic> data) async {
     try {
-      await _firestore.collection(_collection).doc(uid).update(data);
+      await _firestore.collection(collection).doc(uid).update(data);
     } catch (e) {
       logger.e('Error updating user in Firestore: $e');
       rethrow;

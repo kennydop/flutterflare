@@ -22,6 +22,7 @@ abstract class UserModel with _$UserModel {
     DateTime? updatedAt,
     DateTime? lastLoginAt,
     @Default(false) bool isOnline,
+    @Default([]) List<String> fcmTokens,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
@@ -69,6 +70,7 @@ abstract class UserModel with _$UserModel {
       updatedAt: now,
       lastLoginAt: now,
       isOnline: true,
+      fcmTokens: [],
     );
   }
 }

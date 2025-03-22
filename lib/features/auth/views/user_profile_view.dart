@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/services/notification/toast_service.dart';
 import 'package:flutterflare/features/auth/models/user_model.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
+import 'package:flutterflare/features/settings/views/notification_settings_view.dart';
+import 'package:go_router/go_router.dart';
 
 class UserProfileView extends ConsumerWidget {
   static const routePath = '/profile';
@@ -150,10 +153,20 @@ class UserProfileView extends ConsumerWidget {
             user.isOnline ? 'Online' : 'Offline',
           ),
 
+          // Settings section
           const SizedBox(height: 24),
+          _buildSectionHeader(context, 'Settings'),
+          _buildSettingsItem(
+            context,
+            'Notification Preferences',
+            'Manage how and when you receive notifications',
+            Icons.notifications_none,
+            () => context.push(NotificationSettingsView.routePath),
+          ),
 
-          // Profile information section
-          _buildSectionHeader(context, 'Profile'),
+          // Personal information section
+          const SizedBox(height: 24),
+          _buildSectionHeader(context, 'Personal Information'),
           _buildEditableInfoItem(
             context,
             'First Name',
@@ -256,7 +269,9 @@ class UserProfileView extends ConsumerWidget {
         CircleAvatar(
           radius: 50,
           backgroundImage:
-              user.photoURL != null ? NetworkImage(user.photoURL!) : null,
+              user.photoURL != null
+                  ? CachedNetworkImageProvider(user.photoURL!)
+                  : null,
           child:
               user.photoURL == null
                   ? Text(
@@ -330,6 +345,27 @@ class UserProfileView extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(value, style: Theme.of(context).textTheme.bodyMedium),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSettingsItem(
+    BuildContext context,
+    String title,
+    String subtitle,
+    IconData icon,
+    VoidCallback onTap,
+  ) {
+    return Card(
+      elevation: 0,
+      color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        subtitle: Text(subtitle),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: onTap,
       ),
     );
   }

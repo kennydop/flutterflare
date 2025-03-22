@@ -13,6 +13,9 @@ class AppLifecycleService extends WidgetsBindingObserver {
   bool _isInForeground = true;
   bool _isUpdatingStatus = false;
 
+  // Public getter for the foreground state
+  bool get isInForeground => _isInForeground;
+
   AppLifecycleService(this._ref) {
     WidgetsBinding.instance.addObserver(this);
     _checkAndUpdateUserOnlineStatus();

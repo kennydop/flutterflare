@@ -19,9 +19,11 @@ class InternetStatusListener extends ConsumerWidget {
       previous,
       current,
     ) {
-      if ((current.isFirstCheck &&
-              current.status == InternetStatus.disconnected) ||
-          (!current.isFirstCheck && previous != current)) {
+      // Only show snackbar if the shouldShowAlert flag is true
+      if (current.shouldShowAlert &&
+          ((current.isFirstCheck &&
+                  current.status == InternetStatus.disconnected) ||
+              (!current.isFirstCheck && previous != current))) {
         _showNetworkStatusSnackBar(
           context,
           current.status == InternetStatus.connected,
