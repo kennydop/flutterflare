@@ -4,7 +4,8 @@ import 'package:flutterflare/core/constants/app_sizes.dart';
 import 'package:flutterflare/core/constants/app_strings.dart';
 
 class AppErrorWidget extends StatelessWidget {
-  const AppErrorWidget({super.key});
+  final String? error;
+  const AppErrorWidget({super.key, this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class AppErrorWidget extends StatelessWidget {
             ),
             AppSizes.gapH20,
             Text(
-              AppStrings.errorOccurred,
+              error ?? AppStrings.errorOccurred,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],

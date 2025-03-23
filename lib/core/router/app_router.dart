@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterflare/core/services/storage/local_storage_service.dart';
 import 'package:flutterflare/features/auth/views/user_profile_view.dart';
 import 'package:flutterflare/features/home/views/home_view.dart';
 import 'package:flutterflare/features/onboarding/views/onboarding_view.dart';
 import 'package:flutterflare/features/settings/views/notification_settings_view.dart';
+import 'package:flutterflare/shared/widgets/app_error_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutterflare/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutterflare/features/auth/views/login_view.dart';
@@ -12,8 +12,18 @@ import 'package:flutterflare/features/auth/views/register_view.dart';
 import 'package:flutterflare/features/auth/views/forgot_password_view.dart';
 import 'package:flutterflare/features/welcome/views/welcome_view.dart';
 import 'package:flutterflare/shared/widgets/app_loading_screen.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+part 'app_router.g.dart';
+
+// Root navigator key for the app
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+// Provider to access the root navigator key
+@Riverpod(keepAlive: true)
+GlobalKey<NavigatorState> rootNavigatorKey(RootNavigatorKeyRef ref) {
+  return _rootNavigatorKey;
+}
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
@@ -114,8 +124,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const ForgotPasswordView(),
       ),
       GoRoute(
-        path: '/profile',
-        name: 'profile',
+        path: UserProfileView.routePath,
         builder: (context, state) => const UserProfileView(),
       ),
       GoRoute(
@@ -124,13 +133,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
     errorBuilder:
-        (context, state) => Scaffold(
-          body: Center(
-            child: Text(
-              'Error: ${state.error}',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-        ),
+        (context, state) => AppErrorWidget(error: 'Error: ${state.error}'),
   );
 });

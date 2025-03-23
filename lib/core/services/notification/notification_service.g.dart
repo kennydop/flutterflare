@@ -23,7 +23,7 @@ final fcmTokenProvider = AutoDisposeFutureProvider<String?>.internal(
 // ignore: unused_element
 typedef FcmTokenRef = AutoDisposeFutureProviderRef<String?>;
 String _$notificationServiceHash() =>
-    r'96c3632a0260489043a69b9c1a8e64ca0eb58a1a';
+    r'4503849e3274326f655d928de8c336f35b0119fa';
 
 /// See also [notificationService].
 @ProviderFor(notificationService)

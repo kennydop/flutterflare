@@ -40,7 +40,6 @@ class App extends ConsumerWidget {
     if (auth.isInitialized && !removedSplash) {
       removedSplash = true;
       FlutterNativeSplash.remove();
-      logger.d('******* Splash removed *******');
     }
 
     return ToastificationWrapper(
